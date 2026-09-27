@@ -180,20 +180,18 @@ namespace DVLD_DataAccessLayer
             string query = @"SELECT L.LocalDrivingLicenseApplicationID, LicenseClasses.ClassName, P.NationalNo,
                                  CONCAT (P.FirstName,' ', P.SecondName, ' ', P.ThirdName, ' ', P.LastName) AS FullName,
                                  App.ApplicationDate,
-                                        (SELECT COUNT(T.TestAppointmentID) 
-                                        FROM  TestAppointments TA JOIN Tests T ON TA.TestAppointmentID = T.TestAppointmentID
-                                        WHERE (T.TestResult = 1 AND TA.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID)) 
-                                 AS PassedTestCount,
+                                   (SELECT COUNT(T.TestAppointmentID) 
+                                   FROM  TestAppointments TA JOIN Tests T ON TA.TestAppointmentID = T.TestAppointmentID
+                                   WHERE (T.TestResult = 1 AND TA.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID)) AS PassedTestCount,
                                  CASE
                                    WHEN App.ApplicationStatus = 1 THEN 'New'
                                    WHEN App.ApplicationStatus = 2 THEN 'Canceled'
                                    WHEN App.ApplicationStatus = 3 THEN 'Completed'
                                  END AS [Status]
-
-                            FROM   LocalDrivingLicenseApplications L INNER JOIN
-                                   LicenseClasses ON L.LicenseClassID = LicenseClasses.LicenseClassID INNER JOIN
-                                   Applications App ON L.ApplicationID = App.ApplicationID INNER JOIN
-                                   People P ON App.ApplicantPersonID = P.PersonID
+                            FROM LocalDrivingLicenseApplications L INNER JOIN
+                                 LicenseClasses ON L.LicenseClassID = LicenseClasses.LicenseClassID INNER JOIN
+                                 Applications App ON L.ApplicationID = App.ApplicationID INNER JOIN
+                                 People P ON App.ApplicantPersonID = P.PersonID
                             ORDER BY L.LocalDrivingLicenseApplicationID DESC";
 
 

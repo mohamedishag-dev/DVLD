@@ -1,6 +1,5 @@
 ﻿using DVLD_BusinessLayer;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace DVLD_PresentationLayer
@@ -15,16 +14,11 @@ namespace DVLD_PresentationLayer
         private void button1_Click(object sender, EventArgs e)
         {
             int LicenseAppID = int.Parse(textBox1.Text.Trim());
-
-            ctrlLocalDrivingLicenseApplication1.LoadLicenseApplicationCard(LicenseAppID);
+            clsTestAppointment TestAppointment = clsTestAppointment.Find(LicenseAppID);
+            ctrlLocalDrivingLicenseApplication1.LoadAppointmentCard(TestAppointment.LocalDrivingLicenseAppointmentID);
         }
 
-        private void frmTest_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ctrlLocalDrivingLicenseApplication1_Load(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

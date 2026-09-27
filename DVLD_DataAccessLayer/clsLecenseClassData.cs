@@ -7,7 +7,7 @@ namespace DVLD_DataAccessLayer
     public class clsLecenseClassData
     {
         public static bool GetLecenseClassInfoByID(int LecenseClassID, ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge,
-            ref byte DefaultValidityLength, ref decimal ClassFees)
+            ref byte DefaultValidityLength, ref float Fees)
         {
 
             bool isFound = false;
@@ -18,7 +18,7 @@ namespace DVLD_DataAccessLayer
 
             SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@LecenseClassID", LecenseClassID);
+            command.Parameters.AddWithValue("@LicenseClassID", LecenseClassID);
 
             try
             {
@@ -34,7 +34,7 @@ namespace DVLD_DataAccessLayer
                     ClassDescription = (string)reader["ClassDescription"];
                     MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
                     DefaultValidityLength = (byte)reader["DefaultValidityLength"];
-                    ClassFees = (decimal)reader["ClassFees"];
+                    Fees = Convert.ToSingle(reader["ClassFees"]);
 
                 }
                 else
@@ -62,7 +62,7 @@ namespace DVLD_DataAccessLayer
         }
 
         public static bool GetLecenseClassInfoByClassName(string ClassName, ref int LicenseClassID, ref string ClassDescription, ref byte MinimumAllowedAge,
-            ref byte DefaultValidityLength, ref decimal ClassFees)
+            ref byte DefaultValidityLength, ref float Fees)
         {
 
             bool isFound = false;
@@ -89,7 +89,7 @@ namespace DVLD_DataAccessLayer
                     ClassDescription = (string)reader["ClassDescription"];
                     MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
                     DefaultValidityLength = (byte)reader["DefaultValidityLength"];
-                    ClassFees = (decimal)reader["ClassFees"];
+                    Fees = Convert.ToSingle(reader["ClassFees"]);
 
                 }
                 else

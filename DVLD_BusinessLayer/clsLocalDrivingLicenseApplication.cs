@@ -12,14 +12,14 @@ namespace DVLD_BusinessLayer
         public int ApplicationID { set; get; }
         public clsApplication ApplicationInfo = new clsApplication();
         public int LicenseClassID { set; get; }
-        public clsLecenseClass LecenseClassInfo = new clsLecenseClass();
+        public clsLicenseClass LecenseClassInfo = new clsLicenseClass();
         public clsLocalDrivingLicenseApplication()
         {
             this.LocalDrivingLicenseApplicationID = -1;
             this.ApplicationID = -1;
             this.ApplicationInfo = new clsApplication();
             this.LicenseClassID = -1;
-            this.LecenseClassInfo = new clsLecenseClass();
+            this.LecenseClassInfo = new clsLicenseClass();
             this.Mode = enMode.AddNew;
         }
 
@@ -27,9 +27,9 @@ namespace DVLD_BusinessLayer
         {
             this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
             this.ApplicationID = ApplicationID;
-            this.ApplicationInfo = clsApplication.Find(ApplicationID);
+            this.ApplicationInfo = clsApplication.Find(this.ApplicationID);
             this.LicenseClassID = LicenseClassID;
-            this.LecenseClassInfo = clsLecenseClass.Find(LicenseClassID);
+            this.LecenseClassInfo = clsLicenseClass.Find(this.LicenseClassID);
             this.Mode = enMode.Update;
         }
 

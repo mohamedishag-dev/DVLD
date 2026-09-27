@@ -32,7 +32,7 @@ namespace DVLD_PresentationLayer.Tests
         private void _FillLeceseClassInComoboBox()
         {
 
-            cbLecenseClass.DataSource = clsLecenseClass.GetAllLecenseClasss();
+            cbLecenseClass.DataSource = clsLicenseClass.GetAllLecenseClasss();
             cbLecenseClass.DisplayMember = "ClassName";
             cbLecenseClass.SelectedIndex = 2;
         }
@@ -68,7 +68,7 @@ namespace DVLD_PresentationLayer.Tests
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            _LicenseApplication.LicenseClassID = clsLecenseClass.Find(cbLecenseClass.Text.Trim()).LecenseClassID;
+            _LicenseApplication.LicenseClassID = clsLicenseClass.Find(cbLecenseClass.Text.Trim()).LecenseClassID;
 
 
             if (_LicenseApplication.Save())

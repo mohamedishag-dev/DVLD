@@ -1,18 +1,11 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_PresentationLayer.People;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_PresentationLayer.Applications.Controls
 {
-    public partial class ctrlLocalDrivingLicenseApplication : UserControl
+    public partial class ctrlAppointmentCard : UserControl
     {
         clsLocalDrivingLicenseApplication _LicenseApp;
         private int _LocalDrivingLicenseApplicationID = -1;
@@ -21,12 +14,12 @@ namespace DVLD_PresentationLayer.Applications.Controls
             get { return _LocalDrivingLicenseApplicationID; }
         }
 
-        public ctrlLocalDrivingLicenseApplication()
+        public ctrlAppointmentCard()
         {
             InitializeComponent();
         }
 
-        public void LoadLicenseApplicationCard(int LocalDrivingLicenseApplicationID)
+        public void LoadAppointmentCard(int LocalDrivingLicenseApplicationID)
         {
 
             _LicenseApp = clsLocalDrivingLicenseApplication.Find(LocalDrivingLicenseApplicationID);
@@ -43,7 +36,7 @@ namespace DVLD_PresentationLayer.Applications.Controls
                 _FillDrivingLicenseApplicationInfo();
 
         }
- 
+
         public void ResetLicenseApplicationnfo()
         {
             _LocalDrivingLicenseApplicationID = -1;
@@ -62,6 +55,7 @@ namespace DVLD_PresentationLayer.Applications.Controls
             lblStatusDate.Text = "[????]";
             lblCreatedBy.Text = "[????]";
             llViewPersonInfo.Enabled = false;
+            llShowLicenseInfo.Enabled = false;
         }
 
         private void _FillDrivingLicenseApplicationInfo()
@@ -69,18 +63,18 @@ namespace DVLD_PresentationLayer.Applications.Controls
             _LocalDrivingLicenseApplicationID = _LicenseApp.LocalDrivingLicenseApplicationID;
             //Fill Driving License Application Info
             lblAppID.Text = _LicenseApp.LocalDrivingLicenseApplicationID.ToString();
-         //   lblAppliedForLicense.Text = _LicenseApp.LecenseClassInfo.ClassName.ToString();
-         //   lblPassedTests.Text = _LicenseApp.LocalDrivingLicenseApplicationID.ToString();
-
+            lblAppliedForLicense.Text = _LicenseApp.LecenseClassInfo.ClassName.ToString();
+            //   lblPassedTests.Text = _LicenseApp.LocalDrivingLicenseApplicationID.ToString();
+            
             //Fill Application Basic Info
             lbID.Text = _LicenseApp.ApplicationID.ToString();
-            lblStatus.Text = _LicenseApp.ApplicationInfo.Status.ToString();
+            lblStatus.Text = _LicenseApp.ApplicationInfo.Status == 1 ? "New" : _LicenseApp.ApplicationInfo.Status == 2 ? "Canceled" : "Completed";
             lblFess.Text = _LicenseApp.ApplicationInfo.PaidFees.ToString();
             lblType.Text = _LicenseApp.ApplicationInfo.ApplicationTypeID.ToString();
             lblApplicant.Text = _LicenseApp.ApplicationInfo.PersonInfo.FullName.ToString();
             lblDate.Text = _LicenseApp.ApplicationInfo.ApplicationDate.ToShortDateString();
-            lblStatusDate.Text =  _LicenseApp.ApplicationInfo.LastStatusDate.ToShortDateString();
-            lblCreatedBy.Text =  _LicenseApp.ApplicationInfo.CreatedByUser.UserName.ToString();
+            lblStatusDate.Text = _LicenseApp.ApplicationInfo.LastStatusDate.ToShortDateString();
+            lblCreatedBy.Text = _LicenseApp.ApplicationInfo.CreatedByUser.UserName.ToString();
             llViewPersonInfo.Enabled = true;
         }
 
@@ -89,7 +83,7 @@ namespace DVLD_PresentationLayer.Applications.Controls
             frmShowPersonInfo frm = new frmShowPersonInfo(_LicenseApp.ApplicationInfo.ApplicantPersonID);
             frm.ShowDialog();
 
-            LoadLicenseApplicationCard(LocalDrivingLicenseApplicationID);
+            LoadAppointmentCard(LocalDrivingLicenseApplicationID);
         }
 
         private void ctrlLocalDrivingLicenseApplication_Load(object sender, EventArgs e)

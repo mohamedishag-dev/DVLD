@@ -55,11 +55,23 @@
     <Compile Include="Applications\Application Type\frmListApplicationType.Designer.cs">
       <DependentUpon>frmListApplicationType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\Controls\ctrlLocalDrivingLicenseApplication.cs">
+    <Compile Include="Applications\Controls\ctrlAppointmentCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Applications\Controls\ctrlLocalDrivingLicenseApplication.Designer.cs">
-      <DependentUpon>ctrlLocalDrivingLicenseApplication.cs</DependentUpon>
+    <Compile Include="Applications\Controls\ctrlAppointmentCard.Designer.cs">
+      <DependentUpon>ctrlAppointmentCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\frmSechduleTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\frmSechduleTest.Designer.cs">
+      <DependentUpon>frmSechduleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\frmTestAppoinments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\frmTestAppoinments.Designer.cs">
+      <DependentUpon>frmTestAppoinments.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplication.cs">
       <SubType>Form</SubType>
@@ -99,16 +111,16 @@
     <Compile Include="Applications\Local Driving License\frmAddLocalDrivingLicenseApplication.Designer.cs">
       <DependentUpon>frmAddLocalDrivingLicenseApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmListTestTypes.cs">
+    <Compile Include="Tests\Test Type\frmListTestTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmListTestTypes.Designer.cs">
+    <Compile Include="Tests\Test Type\frmListTestTypes.Designer.cs">
       <DependentUpon>frmListTestTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmUpdateTestType.cs">
+    <Compile Include="Tests\Test Type\frmUpdateTestType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmUpdateTestType.Designer.cs">
+    <Compile Include="Tests\Test Type\frmUpdateTestType.Designer.cs">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\Controls\ctrlUserCard.cs">
@@ -177,8 +189,14 @@
     <EmbeddedResource Include="Applications\Application Type\frmListApplicationType.resx">
       <DependentUpon>frmListApplicationType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\Controls\ctrlLocalDrivingLicenseApplication.resx">
-      <DependentUpon>ctrlLocalDrivingLicenseApplication.cs</DependentUpon>
+    <EmbeddedResource Include="Applications\Controls\ctrlAppointmentCard.resx">
+      <DependentUpon>ctrlAppointmentCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\frmSechduleTest.resx">
+      <DependentUpon>frmSechduleTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\frmTestAppoinments.resx">
+      <DependentUpon>frmTestAppoinments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplication.resx">
       <DependentUpon>frmListLocalDrivingLicenseApplication.cs</DependentUpon>
@@ -198,10 +216,10 @@
     <EmbeddedResource Include="Applications\Local Driving License\frmAddLocalDrivingLicenseApplication.resx">
       <DependentUpon>frmAddLocalDrivingLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmListTestTypes.resx">
+    <EmbeddedResource Include="Tests\Test Type\frmListTestTypes.resx">
       <DependentUpon>frmListTestTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmUpdateTestType.resx">
+    <EmbeddedResource Include="Tests\Test Type\frmUpdateTestType.resx">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\Controls\ctrlUserCard.resx">
@@ -370,6 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Drivers\" />
+    <Folder Include="Licenses\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Close 32.png" />
@@ -535,6 +554,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PassedTests 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddAppointment 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vision Test 321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vision 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Count 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

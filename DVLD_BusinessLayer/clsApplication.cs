@@ -19,7 +19,6 @@ namespace DVLD_BusinessLayer
         public DateTime LastStatusDate { set; get; }
         public float PaidFees { set; get; }
         public int CreatedByUserID { set; get; }
-
         public clsUser CreatedByUser;
         public clsApplication()
         {

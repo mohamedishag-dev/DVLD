@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Applications;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -204,7 +205,6 @@ namespace DVLD_PresentationLayer.Tests
             }
         }
 
-
         private void showDitelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -220,8 +220,8 @@ namespace DVLD_PresentationLayer.Tests
     
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+            frmTestAppoinments frm = new frmTestAppoinments((int)dgvLDL_App.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -254,9 +254,10 @@ namespace DVLD_PresentationLayer.Tests
 
         }
 
-        private void cmsApplication_Click(object sender, EventArgs e)
+        private void cmsApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            //MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //(int)dgvLDL_App.CurrentRow.Cells[0].Value
         }
     }
 }

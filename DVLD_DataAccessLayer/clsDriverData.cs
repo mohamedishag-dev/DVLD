@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace DVLD_DataAccessLayer
@@ -215,6 +216,87 @@ namespace DVLD_DataAccessLayer
             }
 
             return isFound;
+        }
+
+        public static bool IsDriverExistForNationalNo(string NationalNo)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT Found=1 FROM  
+                            Drivers INNER JOIN People ON Drivers.PersonID = People.PersonID 
+                              WHERE People.NationalNo = @NationalNo";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
+        public static DataTable GetAllDrivers()
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT DISTINCT Drivers.DriverID, People.PersonID, People.NationalNo,
+                                    People.FirstName+' '+People.SecondName+' '+People.ThirdName+' '+People.LastName AS FullName,
+                                    Drivers.CreatedDate, Licenses.IsActive
+                               FROM Drivers INNER JOIN
+                                    People ON Drivers.PersonID = People.PersonID INNER JOIN
+                                    Licenses ON Drivers.DriverID = Licenses.DriverID
+                           ORDER BY FullName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+
         }
 
 

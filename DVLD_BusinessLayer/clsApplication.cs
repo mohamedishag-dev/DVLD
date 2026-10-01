@@ -17,7 +17,6 @@ namespace DVLD_BusinessLayer
 
         public int ApplicationID { set; get; }
         public int ApplicantPersonID { set; get; }
-
         public string ApplicantName
         {
             get 
@@ -26,7 +25,6 @@ namespace DVLD_BusinessLayer
                     
             }
         }
-
         public clsPerson PersonInfo;
         public int ApplicationTypeID { set; get; }
         public clsApplicationType ApplicationTypeInfo;

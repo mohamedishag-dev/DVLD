@@ -1,5 +1,6 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
+using System.Data;
 
 namespace DVLD_BusinessLayer
 {
@@ -83,8 +84,34 @@ namespace DVLD_BusinessLayer
 
         }
 
+        public static DataTable GetAllDrivers()
+        {
+            return clsDriverData.GetAllDrivers();
+        }
 
+        public static clsDriver Find(int DriverID)
+        {
 
+            int PersonID = -1, CreatedByUserID = -1;
+            DateTime CreatedDate = DateTime.Now;
+
+            if (clsDriverData.GetDriverInfoByID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate))
+                return new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
+            else
+                return null;
+        }
+
+        public static bool IsDriverExist(int DriverID)
+        {
+            return clsDriverData.IsDriverExist(DriverID);
+        }
+
+        public static bool IsDriverExist(string NationalNo)
+        {
+            return clsDriverData.IsDriverExistForNationalNo(NationalNo);
+        }
+
+    
     }
 
 }

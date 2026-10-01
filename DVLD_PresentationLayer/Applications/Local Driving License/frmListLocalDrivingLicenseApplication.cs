@@ -262,16 +262,20 @@ namespace DVLD_PresentationLayer.Tests
 
         private void cmsApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            int TestType = clsTestAppointment.GetTestTypeID((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value);
+           // editToolStripMenuItem.Enabled=cls
 
-            scheduleVisionTestToolStripMenuItem.Enabled = (TestType < (int)clsTestType.enTestType.VisionTest);
-            scheduleWrittenTestToolStripMenuItem.Enabled = (TestType < (int)clsTestType.enTestType.WrittenTest);
-          //  scheduleStreetTestToolStripMenuItem.Enabled = !(TestType == ((int)clsTestType.enTestType.StreetTest));
-            schduletestsToolStripMenuItem.Enabled= !(TestType == ((int)clsTestType.enTestType.StreetTest));
-            //  scheduleWrittenTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.VisionTest);
-            //  scheduleStreetTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.WrittenTest);
+            //int LocalDrivingLicenseApplicationID = (int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value;
 
-            issueDirvingLicenseFindTimeToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.StreetTest);
+            //scheduleVisionTestToolStripMenuItem.Enabled = !clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.VisionTest);
+            //scheduleWrittenTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.VisionTest);
+            //scheduleWrittenTestToolStripMenuItem.Enabled = !clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.WrittenTest);
+            //scheduleStreetTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.WrittenTest);
+            //schduletestsToolStripMenuItem.Enabled = !clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.StreetTest);
+
+
+            //issueDirvingLicenseForFirstTimeToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest(LocalDrivingLicenseApplicationID, (int)clsTestType.enTestType.StreetTest);
+            //showLicenseToolStripMenuItem.Enabled = clsDriver.IsDriverExist((string)dgvDrivingLicenseApp.CurrentRow.Cells[2].Value);
+
         }
 
     }

@@ -61,6 +61,18 @@
     <Compile Include="Applications\Controls\ctrlAppointmentCard.Designer.cs">
       <DependentUpon>ctrlAppointmentCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Drivers\frmDrivers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drivers\frmDrivers.Designer.cs">
+      <DependentUpon>frmDrivers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\frmIssueDirvingLicenseFindTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmIssueDirvingLicenseFindTime.Designer.cs">
+      <DependentUpon>frmIssueDirvingLicenseFindTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\frmSechduleTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,12 +96,6 @@
     </Compile>
     <Compile Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplication.Designer.cs">
       <DependentUpon>frmListLocalDrivingLicenseApplication.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTest.Designer.cs">
-      <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="Global Classes\clsValidatoin.cs" />
@@ -198,6 +204,12 @@
     <EmbeddedResource Include="Applications\Controls\ctrlAppointmentCard.resx">
       <DependentUpon>ctrlAppointmentCard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Drivers\frmDrivers.resx">
+      <DependentUpon>frmDrivers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmIssueDirvingLicenseFindTime.resx">
+      <DependentUpon>frmIssueDirvingLicenseFindTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tests\frmSechduleTest.resx">
       <DependentUpon>frmSechduleTest.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,9 +221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License\frmListLocalDrivingLicenseApplication.resx">
       <DependentUpon>frmListLocalDrivingLicenseApplication.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTest.resx">
-      <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Controls\ctrlPersonWithFilter.resx">
       <DependentUpon>ctrlPersonWithFilter.cs</DependentUpon>
@@ -395,10 +404,7 @@
   <ItemGroup>
     <None Include="Resources\Male 5121.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Drivers\" />
-    <Folder Include="Licenses\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\Close 32.png" />
   </ItemGroup>
@@ -578,6 +584,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Notes 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Driver Main.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

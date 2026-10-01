@@ -25,39 +25,39 @@ namespace DVLD_PresentationLayer.Tests
         {
 
             _GetAllLocalDrivingLicenseApp = clsLocalDrivingLicenseApplication.GetAllLocalDrivingLicenseApplication();
-            dgvLDL_App.DataSource = _GetAllLocalDrivingLicenseApp;
+            dgvDrivingLicenseApp.DataSource = _GetAllLocalDrivingLicenseApp;
             cbFilterBy.SelectedIndex = 0;
 
-            lblRecordsCount.Text = dgvLDL_App.RowCount.ToString();
-            if (dgvLDL_App.RowCount > 0)
+            lblRecordsCount.Text = dgvDrivingLicenseApp.RowCount.ToString();
+            if (dgvDrivingLicenseApp.RowCount > 0)
             {
-                dgvLDL_App.Columns[0].HeaderText = "L.D.L.AppID";
-                dgvLDL_App.Columns[0].Width = 100;
+                dgvDrivingLicenseApp.Columns[0].HeaderText = "L.D.L.AppID";
+                dgvDrivingLicenseApp.Columns[0].Width = 100;
 
-                dgvLDL_App.Columns[1].HeaderText = "Driving Class";
-                dgvLDL_App.Columns[1].Width = 190;
+                dgvDrivingLicenseApp.Columns[1].HeaderText = "Driving Class";
+                dgvDrivingLicenseApp.Columns[1].Width = 190;
 
-                dgvLDL_App.Columns[2].HeaderText = "National No.";
-                dgvLDL_App.Columns[2].Width = 100;
+                dgvDrivingLicenseApp.Columns[2].HeaderText = "National No.";
+                dgvDrivingLicenseApp.Columns[2].Width = 100;
 
-                dgvLDL_App.Columns[3].HeaderText = "FullName";
-                dgvLDL_App.Columns[3].Width = 300;
+                dgvDrivingLicenseApp.Columns[3].HeaderText = "FullName";
+                dgvDrivingLicenseApp.Columns[3].Width = 300;
 
-                dgvLDL_App.Columns[4].HeaderText = "Application Date Name";
-                dgvLDL_App.Columns[4].Width = 140;
+                dgvDrivingLicenseApp.Columns[4].HeaderText = "Application Date Name";
+                dgvDrivingLicenseApp.Columns[4].Width = 140;
 
-                dgvLDL_App.Columns[5].HeaderText = "Passed Test";
-                dgvLDL_App.Columns[5].Width = 90;
+                dgvDrivingLicenseApp.Columns[5].HeaderText = "Passed Test";
+                dgvDrivingLicenseApp.Columns[5].Width = 90;
 
-                dgvLDL_App.Columns[6].HeaderText = "Status";
-                dgvLDL_App.Columns[6].Width = 90;
+                dgvDrivingLicenseApp.Columns[6].HeaderText = "Status";
+                dgvDrivingLicenseApp.Columns[6].Width = 90;
             }
         }
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             _GetAllLocalDrivingLicenseApp.DefaultView.RowFilter = "";
-            lblRecordsCount.Text = dgvLDL_App.RowCount.ToString();
+            lblRecordsCount.Text = dgvDrivingLicenseApp.RowCount.ToString();
 
             if (cbFilterBy.Text == "Status")
             {
@@ -106,7 +106,7 @@ namespace DVLD_PresentationLayer.Tests
             else
                 _GetAllLocalDrivingLicenseApp.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, FilterValue);
 
-            lblRecordsCount.Text = dgvLDL_App.Rows.Count.ToString();
+            lblRecordsCount.Text = dgvDrivingLicenseApp.Rows.Count.ToString();
         }
 
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace DVLD_PresentationLayer.Tests
             if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
             {
                 _GetAllLocalDrivingLicenseApp.DefaultView.RowFilter = "";
-                lblRecordsCount.Text = dgvLDL_App.Rows.Count.ToString();
+                lblRecordsCount.Text = dgvDrivingLicenseApp.Rows.Count.ToString();
                 return;
             }
 
@@ -153,7 +153,7 @@ namespace DVLD_PresentationLayer.Tests
             else
                 _GetAllLocalDrivingLicenseApp.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
 
-            lblRecordsCount.Text = dgvLDL_App.Rows.Count.ToString();
+            lblRecordsCount.Text = dgvDrivingLicenseApp.Rows.Count.ToString();
 
         }
 
@@ -178,7 +178,7 @@ namespace DVLD_PresentationLayer.Tests
             if (MessageBox.Show("Are you sure do want to Cancel Application ",
                   "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                if (clsLocalDrivingLicenseApplication.CancelApplication((int)dgvLDL_App.CurrentRow.Cells[0].Value))
+                if (clsLocalDrivingLicenseApplication.CancelApplication((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value))
                 {
                     MessageBox.Show("Application Canceled Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmListLocalDrivingLicenseApplication_Load(null, null);
@@ -191,11 +191,12 @@ namespace DVLD_PresentationLayer.Tests
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int DrivingLicenseID = (int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value;
 
-            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvLDL_App.CurrentRow.Cells[0].Value + "]",
+            if (MessageBox.Show("Are you sure you want to delete Application [" + DrivingLicenseID + "]",
                 "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                if (clsLocalDrivingLicenseApplication.DeleteLicenseApplication((int)dgvLDL_App.CurrentRow.Cells[0].Value))
+                if (clsLocalDrivingLicenseApplication.Delete(DrivingLicenseID))
                 {
                     MessageBox.Show("Application Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmListLocalDrivingLicenseApplication_Load(null, null);
@@ -217,22 +218,27 @@ namespace DVLD_PresentationLayer.Tests
 
         }
 
-    
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmTestAppoinments frm = new frmTestAppoinments((int)dgvLDL_App.CurrentRow.Cells[0].Value);
+
+            frmTestAppoinments frm = new frmTestAppoinments((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, clsTestType.enTestType.VisionTest);
             frm.ShowDialog();
+            frmListLocalDrivingLicenseApplication_Load(null, null);
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmTestAppoinments frm = new frmTestAppoinments((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, clsTestType.enTestType.WrittenTest);
+            frm.ShowDialog();
+            frmListLocalDrivingLicenseApplication_Load(null, null);
 
         }
 
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmTestAppoinments frm = new frmTestAppoinments((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, clsTestType.enTestType.StreetTest);
+            frm.ShowDialog();
+            frmListLocalDrivingLicenseApplication_Load(null, null);
 
         }
 
@@ -256,8 +262,17 @@ namespace DVLD_PresentationLayer.Tests
 
         private void cmsApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //(int)dgvLDL_App.CurrentRow.Cells[0].Value
+            int TestType = clsTestAppointment.GetTestTypeID((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value);
+
+            scheduleVisionTestToolStripMenuItem.Enabled = (TestType < (int)clsTestType.enTestType.VisionTest);
+            scheduleWrittenTestToolStripMenuItem.Enabled = (TestType < (int)clsTestType.enTestType.WrittenTest);
+          //  scheduleStreetTestToolStripMenuItem.Enabled = !(TestType == ((int)clsTestType.enTestType.StreetTest));
+            schduletestsToolStripMenuItem.Enabled= !(TestType == ((int)clsTestType.enTestType.StreetTest));
+            //  scheduleWrittenTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.VisionTest);
+            //  scheduleStreetTestToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.WrittenTest);
+
+            issueDirvingLicenseFindTimeToolStripMenuItem.Enabled = clsTestAppointment.IsTackTest((int)dgvDrivingLicenseApp.CurrentRow.Cells[0].Value, (int)clsTestType.enTestType.StreetTest);
         }
+
     }
 }

@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblAppoinments = new System.Windows.Forms.Label();
             this.dgvAppoinments = new System.Windows.Forms.DataGridView();
+            this.cmsAppoinments = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tackTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddPreson = new System.Windows.Forms.Button();
+            this.btnAddAppoiment = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.ctrlAppointmentCard1 = new DVLD_PresentationLayer.Applications.Controls.ctrlAppointmentCard();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppoinments)).BeginInit();
+            this.cmsAppoinments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,12 +62,39 @@
             this.dgvAppoinments.AllowUserToDeleteRows = false;
             this.dgvAppoinments.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvAppoinments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAppoinments.ContextMenuStrip = this.cmsAppoinments;
             this.dgvAppoinments.Location = new System.Drawing.Point(8, 491);
             this.dgvAppoinments.Name = "dgvAppoinments";
             this.dgvAppoinments.ReadOnly = true;
             this.dgvAppoinments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAppoinments.Size = new System.Drawing.Size(681, 133);
             this.dgvAppoinments.TabIndex = 23;
+            // 
+            // cmsAppoinments
+            // 
+            this.cmsAppoinments.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmsAppoinments.ImageScalingSize = new System.Drawing.Size(25, 25);
+            this.cmsAppoinments.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.tackTestToolStripMenuItem});
+            this.cmsAppoinments.Name = "cmsAppoinments";
+            this.cmsAppoinments.Size = new System.Drawing.Size(190, 90);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.edit_32;
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(189, 32);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // tackTestToolStripMenuItem
+            // 
+            this.tackTestToolStripMenuItem.Image = global::DVLD_PresentationLayer.Properties.Resources.Test_32;
+            this.tackTestToolStripMenuItem.Name = "tackTestToolStripMenuItem";
+            this.tackTestToolStripMenuItem.Size = new System.Drawing.Size(189, 32);
+            this.tackTestToolStripMenuItem.Text = "Take Test";
+            this.tackTestToolStripMenuItem.Click += new System.EventHandler(this.TakeTestToolStripMenuItem_Click);
             // 
             // lblRecordsCount
             // 
@@ -84,16 +116,17 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "# Records:";
             // 
-            // btnAddPreson
+            // btnAddAppoiment
             // 
-            this.btnAddPreson.BackgroundImage = global::DVLD_PresentationLayer.Properties.Resources.AddAppointment_32;
-            this.btnAddPreson.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddPreson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPreson.Location = new System.Drawing.Point(646, 456);
-            this.btnAddPreson.Name = "btnAddPreson";
-            this.btnAddPreson.Size = new System.Drawing.Size(43, 29);
-            this.btnAddPreson.TabIndex = 24;
-            this.btnAddPreson.UseVisualStyleBackColor = true;
+            this.btnAddAppoiment.BackgroundImage = global::DVLD_PresentationLayer.Properties.Resources.AddAppointment_32;
+            this.btnAddAppoiment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddAppoiment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddAppoiment.Location = new System.Drawing.Point(646, 456);
+            this.btnAddAppoiment.Name = "btnAddAppoiment";
+            this.btnAddAppoiment.Size = new System.Drawing.Size(43, 29);
+            this.btnAddAppoiment.TabIndex = 24;
+            this.btnAddAppoiment.UseVisualStyleBackColor = true;
+            this.btnAddAppoiment.Click += new System.EventHandler(this.btnAddAppoiment_Click);
             // 
             // btnClose
             // 
@@ -145,7 +178,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblAppoinments);
-            this.Controls.Add(this.btnAddPreson);
+            this.Controls.Add(this.btnAddAppoiment);
             this.Controls.Add(this.dgvAppoinments);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label1);
@@ -158,6 +191,7 @@
             this.Text = "Vision Test Appoinments";
             this.Load += new System.EventHandler(this.frmSechduleTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppoinments)).EndInit();
+            this.cmsAppoinments.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +201,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblAppoinments;
-        private System.Windows.Forms.Button btnAddPreson;
+        private System.Windows.Forms.Button btnAddAppoiment;
         private System.Windows.Forms.DataGridView dgvAppoinments;
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label1;
@@ -175,5 +209,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblTitle;
         private Controls.ctrlAppointmentCard ctrlAppointmentCard1;
+        private System.Windows.Forms.ContextMenuStrip cmsAppoinments;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tackTestToolStripMenuItem;
     }
 }

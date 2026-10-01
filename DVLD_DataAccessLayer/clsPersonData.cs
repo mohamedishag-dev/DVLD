@@ -317,18 +317,18 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"Update People  
-                            SET NationalNo = @NationalNo, 
-                                FirstName = @FirstName, 
-                                SecondName = @SecondName, 
-                                ThirdName = @ThirdName, 
-                                LastName = @LastName, 
-                                DateOfBirth = @DateOfBirth,
-                                Gendor = @Gendor,
-                                Address = @Address, 
-                                Phone = @Phone,
-                                Email = @Email, 
-                                NationalityCountryID = @NationalityCountryID,
-                                ImagePath = @ImagePath
+                            SET NationalNo = @NationalNo
+                                ,FirstName = @FirstName 
+                                ,SecondName = @SecondName 
+                                ,ThirdName = @ThirdName
+                                ,LastName = @LastName
+                                ,DateOfBirth = @DateOfBirth
+                                ,Gendor = @Gendor
+                                ,Address = @Address 
+                                ,Phone = @Phone
+                                ,Email = @Email 
+                                ,NationalityCountryID = @NationalityCountryID
+                                ,ImagePath = @ImagePath
                                 WHERE PersonID = @PersonID";
 
 

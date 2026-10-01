@@ -6,7 +6,7 @@ namespace DVLD_PresentationLayer.Tests
 {
     public partial class frmAddLocalDrivingLicenseApplication : Form
     {
-        clsLocalDrivingLicenseApplication _LicenseApplication = new clsLocalDrivingLicenseApplication();
+        private clsLocalDrivingLicenseApplication _DrivingLicenseApp = new clsLocalDrivingLicenseApplication();
         public frmAddLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -16,16 +16,16 @@ namespace DVLD_PresentationLayer.Tests
         {
             _FillLeceseClassInComoboBox();
 
-            _LicenseApplication.ApplicationInfo.ApplicationTypeID = 1;
-            _LicenseApplication.ApplicationInfo.PaidFees = clsApplicationType.Find(_LicenseApplication.ApplicationInfo.ApplicationTypeID).Fees;
-            _LicenseApplication.ApplicationInfo.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            _LicenseApplication.ApplicationInfo.Status = 1;
+            _DrivingLicenseApp.ApplicationInfo.ApplicationTypeID = 1;
+            _DrivingLicenseApp.ApplicationInfo.PaidFees = clsApplicationType.Find(_DrivingLicenseApp.ApplicationInfo.ApplicationTypeID).Fees;
+            _DrivingLicenseApp.ApplicationInfo.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            _DrivingLicenseApp.ApplicationInfo.ApplicationStatus = clsApplication.enApplicationStatus.New;
 
 
             btnSave.Enabled = false;
-            lblFess.Text = ((int)_LicenseApplication.ApplicationInfo.PaidFees).ToString();
+            lblFess.Text = ((int)_DrivingLicenseApp.ApplicationInfo.PaidFees).ToString();
             lblCreatedBy.Text = clsGlobal.CurrentUser.UserName;
-            lblApplicationDate.Text = _LicenseApplication.ApplicationInfo.ApplicationDate.ToShortDateString();
+            lblApplicationDate.Text = _DrivingLicenseApp.ApplicationInfo.ApplicationDate.ToShortDateString();
 
         }
 
@@ -52,13 +52,13 @@ namespace DVLD_PresentationLayer.Tests
         {
             if (obj != -1)
             {
-                _LicenseApplication.ApplicationInfo.ApplicantPersonID = ctrlPersonWithFilter1.PersonID;
+                _DrivingLicenseApp.ApplicationInfo.ApplicantPersonID = ctrlPersonWithFilter1.PersonID;
                 btnSave.Enabled = true;
 
             }
             else
             {
-                _LicenseApplication.ApplicationInfo.ApplicantPersonID = -1;
+                _DrivingLicenseApp.ApplicationInfo.ApplicantPersonID = -1;
                 btnSave.Enabled = false;
 
             }
@@ -68,19 +68,28 @@ namespace DVLD_PresentationLayer.Tests
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            _LicenseApplication.LicenseClassID = clsLicenseClass.Find(cbLecenseClass.Text.Trim()).LecenseClassID;
+            _DrivingLicenseApp.LicenseClassID = clsLicenseClass.Find(cbLecenseClass.Text.Trim()).LecenseClassID;
+
+            int ActiveAppID = clsApplication.GetActiveApplicationIDForLicenseClass(_DrivingLicenseApp.ApplicationInfo.ApplicantPersonID,
+                (clsApplication.enApplicationType)_DrivingLicenseApp.ApplicationInfo.ApplicationTypeID, _DrivingLicenseApp.LicenseClassID);
+
+            if (ActiveAppID != -1)
+            {
+                MessageBox.Show("Choose another license Class, the selected Person Already have an active application for the selected class with id=" +
+                    ActiveAppID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
-            if (_LicenseApplication.Save())
+            if (_DrivingLicenseApp.Save())
             {
                 MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                lblDL_ApplicationID.Text = _LicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+                lblDL_ApplicationID.Text = _DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
             }
             else
             {
-                MessageBox.Show("Choose another license Class, the selected Person Already have an active application for the selected class with id=" +
-                    clsLocalDrivingLicenseApplication.Find(_LicenseApplication.ApplicationInfo.ApplicantPersonID, _LicenseApplication.LicenseClassID).LocalDrivingLicenseApplicationID,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 

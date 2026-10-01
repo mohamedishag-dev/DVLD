@@ -68,9 +68,9 @@ namespace DVLD_PresentationLayer.Applications.Controls
             
             //Fill Application Basic Info
             lbID.Text = _LicenseApp.ApplicationID.ToString();
-            lblStatus.Text = _LicenseApp.ApplicationInfo.Status == 1 ? "New" : _LicenseApp.ApplicationInfo.Status == 2 ? "Canceled" : "Completed";
+            lblStatus.Text = _LicenseApp.ApplicationInfo.StatusText;
             lblFess.Text = _LicenseApp.ApplicationInfo.PaidFees.ToString();
-            lblType.Text = _LicenseApp.ApplicationInfo.ApplicationTypeID.ToString();
+            lblType.Text = _LicenseApp.ApplicationInfo.ApplicationTypeInfo.Title.ToString();
             lblApplicant.Text = _LicenseApp.ApplicationInfo.PersonInfo.FullName.ToString();
             lblDate.Text = _LicenseApp.ApplicationInfo.ApplicationDate.ToShortDateString();
             lblStatusDate.Text = _LicenseApp.ApplicationInfo.LastStatusDate.ToShortDateString();

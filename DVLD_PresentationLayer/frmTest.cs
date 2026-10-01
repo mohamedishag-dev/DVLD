@@ -15,7 +15,7 @@ namespace DVLD_PresentationLayer
         {
             int LicenseAppID = int.Parse(textBox1.Text.Trim());
             clsTestAppointment TestAppointment = clsTestAppointment.Find(LicenseAppID);
-            ctrlLocalDrivingLicenseApplication1.LoadAppointmentCard(TestAppointment.LocalDrivingLicenseAppointmentID);
+            ctrlLocalDrivingLicenseApplication1.LoadAppointmentCard(TestAppointment.LocalDrivingLicenseApplicationID);
         }
 
         private void button2_Click(object sender, EventArgs e)

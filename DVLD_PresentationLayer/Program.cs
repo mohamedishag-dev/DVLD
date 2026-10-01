@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Applications;
+﻿using DVLD_BusinessLayer;
+using DVLD_PresentationLayer.Tests;
 using System;
 using System.Windows.Forms;
 
@@ -14,10 +15,9 @@ namespace DVLD_PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-              // Application.Run(new frmSechduleTest());
-             Application.Run(new frmLogin());
-//              Application.Run(new frmTest());
-
+            Application.Run(new frmLogin());
+           
+     
         }
     }
 }

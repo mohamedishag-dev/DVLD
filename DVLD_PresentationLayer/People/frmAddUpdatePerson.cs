@@ -4,7 +4,6 @@ using DVLD_PresentationLayer.Properties;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -16,7 +15,7 @@ namespace DVLD_PresentationLayer.People
         public delegate void DataBackEventHandler(object sender, int PersonID);
 
         // Declare an event using the delegate
-         public event DataBackEventHandler DataBack;
+        public event DataBackEventHandler DataBack;
 
         public enum enMode { AddNew = 0, Update = 1 };
         public enum enGendor { Male = 0, Female = 1 };
@@ -360,12 +359,13 @@ namespace DVLD_PresentationLayer.People
             txtAddress.Text = "";
         }
 
-        private void txtPhone_TextChanged(object sender, EventArgs e)
+        
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!clsValidatoin.IsNumber(txtPhone.Text))
-                txtPhone.Text = txtPhone.Text.Remove(txtPhone.Text.Length - 1);
+            //we allow number incase person id or user id is selected.
+          //  if (txtPhone.Text == "L.D.L.AppID")
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-
 
     }
 }

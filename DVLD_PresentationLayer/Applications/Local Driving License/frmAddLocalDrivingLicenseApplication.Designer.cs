@@ -177,6 +177,7 @@
             // 
             // cbLecenseClass
             // 
+            this.cbLecenseClass.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbLecenseClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLecenseClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.cbLecenseClass.FormattingEnabled = true;

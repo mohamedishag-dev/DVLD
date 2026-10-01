@@ -383,7 +383,7 @@ namespace DVLD_DataAccessLayer
             return isFound;
         }
 
-        public static bool IsLocalDrivingLicenseApplicationExistByApplicationID(string ApplicationID)
+        public static bool IsLocalDrivingLicenseApplicationExistByApplicationID(int ApplicationID)
         {
             bool isFound = false;
 
@@ -416,7 +416,7 @@ namespace DVLD_DataAccessLayer
             return isFound;
         }
 
-        public static bool DeleteLocalDrivingLicenseApplicationByID(int LocalDrivingLicenseApplicationID)
+        public static bool DeleteLocalDrivingLicenseApplication(int LocalDrivingLicenseApplicationID)
         {
 
             int rowsAffected = 0;
@@ -424,7 +424,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"Delete LocalDrivingLicenseApplications 
-                                WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID;";
+                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID;";
 
             SqlCommand command = new SqlCommand(query, connection);
 

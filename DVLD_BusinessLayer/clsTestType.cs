@@ -6,7 +6,7 @@ namespace DVLD_BusinessLayer
     public class clsTestType
     {
         public enum enTestType { VisionTest = 1, WrittenTest = 2, StreetTest = 3 }
-        public clsTestType.enTestType ID { set; get; }
+        public enTestType ID { set; get; }
         public string Title { set; get; }
         public string Description { set; get; }
         public float Fees { set; get; }
@@ -19,7 +19,7 @@ namespace DVLD_BusinessLayer
             this.Fees = 0;
         }
 
-        clsTestType(clsTestType.enTestType ID, string TestTypeTitle, string Description, float Fees)
+        clsTestType(enTestType ID, string TestTypeTitle, string Description, float Fees)
         {
             this.ID = ID;
             this.Title = TestTypeTitle;
@@ -27,7 +27,7 @@ namespace DVLD_BusinessLayer
             this.Fees = Fees;
         }
 
-        public static clsTestType Find(clsTestType.enTestType ID)
+        public static clsTestType Find(enTestType ID)
         {
             string ApplicationTypeTitle = "", TestTypeDescription = "";
             float ApplicationFees = 0;

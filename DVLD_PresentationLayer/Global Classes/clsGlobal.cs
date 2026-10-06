@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DVLD_PresentationLayer
 {
@@ -112,14 +111,11 @@ namespace DVLD_PresentationLayer
                 // concatonate username and passwrod withe seperator.
                 string dataToSave = Username + "  -  " + DateTime.Now.ToString();
 
-                // Create a StreamWriter to write to the file
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    // Write the data to the file
-                    writer.WriteLine(dataToSave);
 
-                    return true;
-                }
+                // Create a New Line to AppendAllText to the file
+                File.AppendAllText(filePath, dataToSave + Environment.NewLine);
+                return true;
+
             }
             catch (Exception ex)
             {

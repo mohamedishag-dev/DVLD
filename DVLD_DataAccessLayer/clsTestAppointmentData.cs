@@ -172,6 +172,77 @@ namespace DVLD_DataAccessLayer
             return isFound;
         }
 
+        public static int CountTackTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        {
+
+            int CountTakeTest = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT COUNT(*)AS TakeTest FROM TestAppointments
+                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID AND TestTypeID = @TestTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null && int.TryParse(result.ToString(), out int Count))
+                {
+                    CountTakeTest = Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                return CountTakeTest;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return CountTakeTest;
+        }
+
+        public static int GetLestRetakeTest()
+        {
+
+            int LestRetakeTest = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT TOP 1 RetakeTestApplicationID
+                               FROM TestAppointments
+                              ORDER BY RetakeTestApplicationID DESC;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null && int.TryParse(result.ToString(), out int Count))
+                {
+                    LestRetakeTest = Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                return LestRetakeTest;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return LestRetakeTest;
+        }
+
         public static int GetActiveTestAppointment(int LocalDrivingLicenseApplicationID)
         {
 
@@ -212,15 +283,15 @@ namespace DVLD_DataAccessLayer
 
         }
 
-        public static int GetTestTypeID(int LocalDrivingLicenseApplicationID)
+        public static int GetPassedTestCount(int LocalDrivingLicenseApplicationID)
         {
-            int TestTypeID = -1;
+            int PassedTests = 0;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT TestTypeID FROM TestAppointments
-                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID AND IsLocked = 1
-                              Order by TestTypeID DESC;";
+            string query = @"SELECT COUNT(T.TestAppointmentID) AS PassedTestCount
+                               FROM TestAppointments TA JOIN Tests T ON TA.TestAppointmentID = T.TestAppointmentID
+                              WHERE (T.TestResult = 1 AND TA.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID);";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -234,19 +305,19 @@ namespace DVLD_DataAccessLayer
 
                 if (result != null && int.TryParse(result.ToString(), out int AppID))
                 {
-                    TestTypeID = AppID;
+                    PassedTests = AppID;
                 }
             }
             catch (Exception ex)
             {
-                return TestTypeID;
+                return PassedTests;
             }
             finally
             {
                 connection.Close();
             }
 
-            return TestTypeID;
+            return PassedTests;
         }
 
         //This Method needs to be reviewed
@@ -258,7 +329,8 @@ namespace DVLD_DataAccessLayer
 
             string query = @"SELECT TestAppointmentID, AppointmentDate, PaidFees, IsLocked
                                FROM TestAppointments
-                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID AND TestTypeID = @TestTypeID;";
+                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID AND TestTypeID = @TestTypeID
+                              ORDER BY TestAppointmentID DESC;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@TestTypeID", TestTypeID);

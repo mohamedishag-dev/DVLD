@@ -1,6 +1,4 @@
 ﻿using DVLD_DataAccessLayer;
-using System;
-using static DVLD_BusinessLayer.clsApplication;
 
 namespace DVLD_BusinessLayer
 {
@@ -11,7 +9,7 @@ namespace DVLD_BusinessLayer
 
         public int TestID { set; get; }
         public int TestAppointmentID { set; get; }
-        public clsTestAppointment TestAppointment;
+        public clsTestAppointment TestAppointmentInfo;
         public string Notes { set; get; }
         public bool TestResult { set; get; }
         public int CreatedByUserID { set; get; }
@@ -34,7 +32,7 @@ namespace DVLD_BusinessLayer
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUser = clsUser.Find(CreatedByUserID);
+            this.CreatedByUser = clsUser.FindByUserID(CreatedByUserID);
             this.Mode = enMode.Update;
         }
 
@@ -78,7 +76,10 @@ namespace DVLD_BusinessLayer
             return clsTestData.UpdateTest(this.TestID, this.TestAppointmentID, this.TestResult, this.Notes, (byte)this.CreatedByUserID);
 
         }
-
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+        {
+            return clsTestData.GetPassedTestCount(LocalDrivingLicenseApplicationID);
+        }
         public static bool IsTestExist(int ApplicationID)
         {
             return clsTestData.IsTestExist(ApplicationID);

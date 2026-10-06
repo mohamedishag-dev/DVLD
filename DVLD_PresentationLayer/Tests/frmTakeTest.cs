@@ -7,7 +7,6 @@ namespace DVLD_PresentationLayer.Tests
     public partial class frmTakeTest : Form
     {
         private int _TestAppointmentID;
-        private clsTestAppointment _TestAppointment;
         private clsTest _Test = new clsTest();
         public frmTakeTest(int TestAppointmentID)
         {
@@ -15,9 +14,20 @@ namespace DVLD_PresentationLayer.Tests
             _TestAppointmentID = TestAppointmentID;
         }
 
+        private void _LoadData()
+        {
+
+            lblFess.Text = _Test.TestAppointmentInfo.PaidFees.ToString();
+            lblDate.Text = _Test.TestAppointmentInfo.AppointmentDate.ToShortDateString();
+            lblD_Class.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.LicenseClassInfo.ClassName.ToString();
+            lblName.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
+            lblAppID.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
+
+        }
+
         private void frmTakeTest_Load(object sender, EventArgs e)
         {
-            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
+            _Test.TestAppointmentInfo = clsTestAppointment.Find(_TestAppointmentID);
             _LoadData();
         }
 
@@ -26,21 +36,10 @@ namespace DVLD_PresentationLayer.Tests
             this.Close();
         }
 
-        private void _LoadData()
-        {
-
-            lblFess.Text = _TestAppointment.PaidFees.ToString();
-            lblDate.Text = _TestAppointment.AppointmentDate.ToShortDateString();
-            lblD_Class.Text = _TestAppointment.DrivingLicenseApp.LecenseClassInfo.ClassName.ToString();
-            lblName.Text = _TestAppointment.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
-            lblAppID.Text = _TestAppointment.DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
-
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            _Test.TestAppointmentID = _TestAppointment.TestAppointmentID;
+            _Test.TestAppointmentID = _Test.TestAppointmentInfo.TestAppointmentID;
             _Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             _Test.TestResult = rbPass.Checked;
             _Test.Notes = txtNotes.Text.Trim();
@@ -51,8 +50,8 @@ namespace DVLD_PresentationLayer.Tests
             {
                 if (_Test.Save())
                 {
-                    _TestAppointment.IsLocked = _Test.TestResult;
-                    if (_TestAppointment.Save())
+                    _Test.TestAppointmentInfo.IsLocked = true;
+                    if (_Test.TestAppointmentInfo.Save())
                     {
 
                         MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);

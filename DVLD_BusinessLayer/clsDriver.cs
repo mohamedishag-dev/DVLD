@@ -32,11 +32,10 @@ namespace DVLD_BusinessLayer
             this.PersonID = PersonID;
             this.PersonInfo = clsPerson.Find(PersonID);
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUser = clsUser.Find(CreatedByUserID);
+            this.CreatedByUser = clsUser.FindByUserID(CreatedByUserID);
             this.CreatedDate = CreatedDate;
             this.Mode = enMode.Update;
         }
-
 
         public bool Save()
         {
@@ -96,6 +95,30 @@ namespace DVLD_BusinessLayer
             DateTime CreatedDate = DateTime.Now;
 
             if (clsDriverData.GetDriverInfoByID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate))
+                return new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
+            else
+                return null;
+        }
+
+        public static clsDriver FindByPersonID(int DriverID)
+        {
+
+            int PersonID = -1, CreatedByUserID = -1;
+            DateTime CreatedDate = DateTime.Now;
+
+            if (clsDriverData.GetDriverInfoByID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate))
+                return new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
+            else
+                return null;
+        }
+
+        public static clsDriver FindForPersonID(int PersonID)
+        {
+
+            int DriverID = -1, CreatedByUserID = -1;
+            DateTime CreatedDate = DateTime.Now;
+
+            if (clsDriverData.GetDriverInfoForPersonID(PersonID, ref DriverID, ref CreatedByUserID, ref CreatedDate))
                 return new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
             else
                 return null;

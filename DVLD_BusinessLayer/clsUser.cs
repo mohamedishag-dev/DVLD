@@ -42,7 +42,7 @@ namespace DVLD_BusinessLayer
             return clsUserData.GetAllUsers();
 
         }
-        public static clsUser Find(int userID)
+        public static clsUser FindByUserID(int userID)
         {
             int personID = -1;
             bool isActive = false;

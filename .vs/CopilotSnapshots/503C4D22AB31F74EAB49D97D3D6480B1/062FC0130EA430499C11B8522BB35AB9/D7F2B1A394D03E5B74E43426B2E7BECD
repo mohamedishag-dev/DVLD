@@ -1,0 +1,71 @@
+﻿using DVLD_BusinessLayer;
+using System;
+using System.Windows.Forms;
+
+namespace DVLD_PresentationLayer
+{
+    public partial class frmIssueDirvingLicenseForTheFirstTime : Form
+    {
+        private clsLicense LicenseInfo;
+        private clsDriver DriverInfo;
+
+        private int _LocalDrivingLicenseApplicationID = -1;
+        private clsLocalDrivingLicenseApplication _DrivingLicenseApp;//= new clsLocalDrivingLicenseApplication();
+        public frmIssueDirvingLicenseForTheFirstTime(int LocalDrivingLicenseApplicationID)
+        {
+            InitializeComponent();
+            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmIssueDirvingLicenseForTheFirstTime_Load(object sender, EventArgs e)
+        {
+            ctrlAppointmentCard1.LoadAppointmentCard(_LocalDrivingLicenseApplicationID);
+            _DrivingLicenseApp = clsLocalDrivingLicenseApplication.Find(_LocalDrivingLicenseApplicationID);
+
+
+        }
+
+        private void btnIssue_Click(object sender, EventArgs e)
+        {
+
+            DriverInfo = clsDriver.FindForPersonID(_DrivingLicenseApp.ApplicationInfo.ApplicantPersonID);
+            if (DriverInfo == null)
+            {
+                DriverInfo.PersonID = _DrivingLicenseApp.ApplicationInfo.ApplicantPersonID;
+                DriverInfo.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                DriverInfo.CreatedDate = DateTime.Now;
+
+                if (!DriverInfo.Save())
+                {
+                    return; 
+                }
+            }
+
+            LicenseInfo.ApplicationID = _DrivingLicenseApp.ApplicationID;
+            LicenseInfo.DriverID = DriverInfo.DriverID;
+            LicenseInfo.LicenseClassID = _DrivingLicenseApp.LicenseClassID;
+            LicenseInfo.IssueDate = DateTime.Now;
+            LicenseInfo.ExpirationDate = DateTime.Now.AddYears(_DrivingLicenseApp.LecenseClassInfo.DefaultValidityLength);
+            LicenseInfo.Notes = txtNotes.Text.Trim();
+            LicenseInfo.PaidFees = _DrivingLicenseApp.LecenseClassInfo.Fees;
+            LicenseInfo.IsActive = true;
+            LicenseInfo.IssueReason = (byte)clsApplication.enApplicationType.NewDrivingLicense;
+            LicenseInfo.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+
+            if (LicenseInfo.Save())
+            {
+                MessageBox.Show("Saved License ID = {0}", LicenseInfo.LicenseID.ToString());
+                this.Close();
+            }
+
+
+        }
+
+
+    }
+}

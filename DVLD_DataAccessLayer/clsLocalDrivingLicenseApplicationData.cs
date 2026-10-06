@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_DataAccessLayer
 {
@@ -38,7 +33,7 @@ namespace DVLD_DataAccessLayer
 
                     ApplicationID = (int)reader["ApplicationID"];
                     LicenseClassID = (int)reader["LicenseClassID"];
-      
+
                 }
                 else
                 {
@@ -94,7 +89,7 @@ namespace DVLD_DataAccessLayer
                     isFound = true;
                     ApplicationID = (int)reader["ApplicationID"];
                     LocalDrivingLicenseApplicationID = (int)reader["LocalDrivingLicenseApplicationID"];
-      
+
                 }
                 else
                 {
@@ -227,7 +222,7 @@ namespace DVLD_DataAccessLayer
 
         }
 
-        public static int AddNewLocalDrivingLicenseApplication(int ApplicationID, int LicenseClassID)  
+        public static int AddNewLocalDrivingLicenseApplication(int ApplicationID, int LicenseClassID)
         {
             //this function will return the new LocalDrivingLicenseApplication id if succeeded and -1 if not.
             int LocalDrivingLicenseApplicationID = -1;
@@ -271,6 +266,51 @@ namespace DVLD_DataAccessLayer
 
 
             return LocalDrivingLicenseApplicationID;
+        }
+
+        public static int GetApplicationStatus(int LocalDrivingLicenseApplicationID)
+        {
+            //this function will return the Status fo Application if succeeded and 0 if not.
+            int ApplicationStatus = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT ApplicationStatus FROM LocalDrivingLicenseApplications L INNER JOIN
+                                        Applications ON L.ApplicationID = Applications.ApplicationID
+                              WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+
+                if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                {
+                    ApplicationStatus = insertedID;
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            finally
+            {
+
+                connection.Close();
+
+            }
+
+
+            return ApplicationStatus;
         }
 
         public static bool UpdateLocalDrivingLicenseApplication(int LocalDrivingLicenseApplicationID, int ApplicationID, int LicenseClassID)

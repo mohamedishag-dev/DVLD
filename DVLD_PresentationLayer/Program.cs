@@ -1,5 +1,4 @@
-﻿using DVLD_BusinessLayer;
-using DVLD_PresentationLayer.Tests;
+﻿using DVLD_PresentationLayer.Licenses;
 using System;
 using System.Windows.Forms;
 

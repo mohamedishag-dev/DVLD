@@ -6,20 +6,6 @@ namespace DVLD_PresentationLayer.Applications
 {
     public partial class frmSechduleTest : Form
     {
-        private bool _RetakeTestEnabled = true;
-        public bool RetakeTestEnabled
-        {
-            get
-            {
-                return _RetakeTestEnabled;
-            }
-            set
-            {
-                _RetakeTestEnabled = value;
-                gbRetakeTest.Enabled = _RetakeTestEnabled;
-            }
-        }
-
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode;
         private int _TestAppointmentID;
@@ -51,48 +37,30 @@ namespace DVLD_PresentationLayer.Applications
             else
                 _ResetDefualtValues();
 
-        }
 
-        private void _ResetDefualtValues()
-        {
-            _TestAppointment = new clsTestAppointment();
-
-            _TestAppointment.TestTypeID = _TestType;
-            _TestAppointment.PaidFees = clsTestType.Find(_TestType).Fees;
-            _TestAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplicationID;
-            _TestAppointment.DrivingLicenseApp = clsLocalDrivingLicenseApplication.Find(_LocalDrivingLicenseApplicationID);
-
-            // Set the minimum and default date to today.
-            dtpDate.MinDate = DateTime.Now;
-            dtpDate.Value = dtpDate.MinDate;
-
-            lblFess.Text = _TestAppointment.PaidFees.ToString();
-            lblTotalFess.Text = _TestAppointment.PaidFees.ToString();
-            lblD_Class.Text = _TestAppointment.DrivingLicenseApp.LecenseClassInfo.ClassName.ToString();
-            lblName.Text = _TestAppointment.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
-            lblAppID.Text = _TestAppointment.DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
-            RetakeTestEnabled = false;
-
-        }
-
-        private void _LoadData()
-        {
-            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
-
-            dtpDate.MinDate = DateTime.Today;
-            dtpDate.Value = _TestAppointment.AppointmentDate;
-            lblFess.Text = _TestAppointment.PaidFees.ToString();
-            lblTotalFess.Text = _TestAppointment.PaidFees.ToString();
-            lblD_Class.Text = _TestAppointment.DrivingLicenseApp.LecenseClassInfo.ClassName.ToString();
-            lblName.Text = _TestAppointment.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
-            lblAppID.Text = _TestAppointment.LocalDrivingLicenseApplicationID.ToString();
-
-            if (_TestAppointment.RetakeTestAppointmentID != -1)
+            switch (_TestType)
             {
-                lblRTestAppID.Text = _TestAppointment.RetakeTestAppointmentID.ToString();
+                case clsTestType.enTestType.VisionTest:
+                    lblTitle.Text = "Scheduled Test";
+                    gbTestInfo.Text = "Vision Test";
+                    pbSechduleTestImage.Image = Properties.Resources.Vision_512;
+                    break;
+
+                case clsTestType.enTestType.WrittenTest:
+                    lblTitle.Text = "Sechdule Test";
+                    gbTestInfo.Text = "Written Test";
+                    pbSechduleTestImage.Image = Properties.Resources.Written_Test_512;
+                    break;
+
+                case clsTestType.enTestType.StreetTest:
+                    lblTitle.Text = "Sechdule Test";
+                    gbTestInfo.Text = "Street Test";
+                    pbSechduleTestImage.Image = Properties.Resources.driving_test_512;
+                    break;
 
             }
-            RetakeTestEnabled = (_TestAppointment.RetakeTestAppointmentID != -1);
+
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -110,6 +78,60 @@ namespace DVLD_PresentationLayer.Applications
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void _ResetDefualtValues()
+        {
+            _TestAppointment = new clsTestAppointment();
+
+            _TestAppointment.TestTypeID = _TestType;
+            _TestAppointment.PaidFees = clsTestType.Find(_TestType).Fees;
+            _TestAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplicationID;
+            _TestAppointment.DrivingLicenseApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+
+            if (clsTestAppointment.CountTackTest(_LocalDrivingLicenseApplicationID, (int)_TestType) > 0)
+            {
+                _TestAppointment.RetakeTestAppointmentID = clsTestAppointment.GetLestRetakeTest();
+                _TestAppointment.PaidFees += clsApplicationType.Find(7).Fees;
+                lblRTestAppID.Text = _TestAppointment.RetakeTestAppointmentID.ToString();
+                lblRAppFess.Text = clsApplicationType.Find(7).Fees.ToString();
+            }
+            // Set the minimum and default date to today.
+            dtpDate.MinDate = DateTime.Now;
+            dtpDate.Value = dtpDate.MinDate;
+
+            lblFess.Text = _TestAppointment.PaidFees.ToString();
+            lblTotalFess.Text = _TestAppointment.PaidFees.ToString();
+            lblD_Class.Text = _TestAppointment.DrivingLicenseApp.LicenseClassInfo.ClassName.ToString();
+            lblName.Text = _TestAppointment.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
+            lblAppID.Text = _TestAppointment.DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
+            gbRetakeTest.Enabled = (_TestAppointment.RetakeTestAppointmentID != -1);
+
+        }
+
+        private void _LoadData()
+        {
+            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
+
+            dtpDate.Value = _TestAppointment.AppointmentDate;
+            if (!_TestAppointment.IsLocked)
+                dtpDate.MinDate = DateTime.Today;
+
+
+            lblFess.Text = _TestAppointment.PaidFees.ToString();
+            lblTotalFess.Text = _TestAppointment.PaidFees.ToString();
+            lblD_Class.Text = _TestAppointment.DrivingLicenseApp.LicenseClassInfo.ClassName.ToString();
+            lblName.Text = _TestAppointment.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
+            lblAppID.Text = _TestAppointment.LocalDrivingLicenseApplicationID.ToString();
+
+            if (_TestAppointment.RetakeTestAppointmentID != -1)
+                lblRTestAppID.Text = _TestAppointment.RetakeTestAppointmentID.ToString();
+
+            gbRetakeTest.Enabled = (_TestAppointment.RetakeTestAppointmentID != -1);
+
+            dtpDate.Enabled = !_TestAppointment.IsLocked;
+            btnSave.Enabled = !_TestAppointment.IsLocked;
+
         }
 
     }

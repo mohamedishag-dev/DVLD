@@ -59,6 +59,58 @@ namespace DVLD_DataAccessLayer
             return isFound;
         }
 
+        public static bool GetDriverInfoForPersonID(int PersonID, ref int DriverID, ref int CreatedByUserID, ref DateTime CreatedDate)
+        {
+
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT * FROM Drivers WHERE PersonID = @PersonID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // The record was found
+                    isFound = true;
+
+                    DriverID = (int)reader["DriverID"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+                    CreatedDate = (DateTime)reader["CreatedDate"];
+
+                }
+                else
+                {
+                    // The record was not found
+                    isFound = false;
+                }
+
+                reader.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                isFound = false;
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
         public static bool UpdateDriver(int DriverID, int PersonID, int CreatedByUserID, DateTime CreatedDate)
         {
 
@@ -149,6 +201,41 @@ namespace DVLD_DataAccessLayer
             return DriverID;
         }
 
+        public static bool IsDriverExistForNationalNo(string NationalNo)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT Found=1 FROM  
+                            Drivers INNER JOIN People ON Drivers.PersonID = People.PersonID 
+                              WHERE People.NationalNo = @NationalNo";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
         public static bool DeleteDriver(int DriverID)
         {
 
@@ -218,54 +305,20 @@ namespace DVLD_DataAccessLayer
             return isFound;
         }
 
-        public static bool IsDriverExistForNationalNo(string NationalNo)
-        {
-            bool isFound = false;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"SELECT Found=1 FROM  
-                            Drivers INNER JOIN People ON Drivers.PersonID = People.PersonID 
-                              WHERE People.NationalNo = @NationalNo";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@NationalNo", NationalNo);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                isFound = reader.HasRows;
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isFound;
-        }
-
         public static DataTable GetAllDrivers()
         {
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT DISTINCT Drivers.DriverID, People.PersonID, People.NationalNo,
+            string query = @"SELECT DISTINCT D.DriverID, People.PersonID, People.NationalNo,
                                     People.FirstName+' '+People.SecondName+' '+People.ThirdName+' '+People.LastName AS FullName,
-                                    Drivers.CreatedDate, Licenses.IsActive
-                               FROM Drivers INNER JOIN
-                                    People ON Drivers.PersonID = People.PersonID INNER JOIN
-                                    Licenses ON Drivers.DriverID = Licenses.DriverID
-                           ORDER BY FullName";
+                                    D.CreatedDate,(SELECT COUNT( *) FROM Licenses
+                              WHERE Licenses.DriverID = D.DriverID AND IsActive = 1) AS IsActive
+                               FROM Drivers D INNER JOIN
+                                    People ON D.PersonID = People.PersonID INNER JOIN
+                                    Licenses ON D.DriverID = Licenses.DriverID
+                              ORDER BY FullName";
 
             SqlCommand command = new SqlCommand(query, connection);
 

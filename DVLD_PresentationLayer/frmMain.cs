@@ -64,7 +64,7 @@ namespace DVLD_PresentationLayer
 
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddLocalDrivingLicenseApplication frm = new frmAddLocalDrivingLicenseApplication();
+            frmAddUpdateLocalDrivingLicenseApplication frm = new frmAddUpdateLocalDrivingLicenseApplication();
             frm.ShowDialog();
         }
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace DVLD_PresentationLayer
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmDrivers frm = new frmDrivers();
+            frmListDrivers frm = new frmListDrivers();
             frm.ShowDialog();
 
         }

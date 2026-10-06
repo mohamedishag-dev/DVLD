@@ -70,6 +70,5 @@ namespace DVLD_PresentationLayer
             this.Close();
         }
 
-
     }
 }

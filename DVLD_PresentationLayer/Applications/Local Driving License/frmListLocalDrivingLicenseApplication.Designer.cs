@@ -53,14 +53,14 @@
             this.showLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.showhistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvDrivingLicenseApp = new System.Windows.Forms.DataGridView();
+            this.LocalDrivingLicenseApplications = new System.Windows.Forms.DataGridView();
             this.cbStatus = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imgPeople = new System.Windows.Forms.PictureBox();
             this.btnAddLocalDrivingLicenseApplication = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.cmsApplication.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDrivingLicenseApp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LocalDrivingLicenseApplications)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPeople)).BeginInit();
             this.SuspendLayout();
@@ -280,20 +280,20 @@
             this.showhistoryToolStripMenuItem.Text = "Show Person License History";
             this.showhistoryToolStripMenuItem.Click += new System.EventHandler(this.showhistoryToolStripMenuItem_Click);
             // 
-            // dgvDrivingLicenseApp
+            // LocalDrivingLicenseApplications
             // 
-            this.dgvDrivingLicenseApp.AllowUserToAddRows = false;
-            this.dgvDrivingLicenseApp.AllowUserToDeleteRows = false;
-            this.dgvDrivingLicenseApp.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvDrivingLicenseApp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDrivingLicenseApp.ContextMenuStrip = this.cmsApplication;
-            this.dgvDrivingLicenseApp.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dgvDrivingLicenseApp.Location = new System.Drawing.Point(14, 212);
-            this.dgvDrivingLicenseApp.Name = "dgvDrivingLicenseApp";
-            this.dgvDrivingLicenseApp.ReadOnly = true;
-            this.dgvDrivingLicenseApp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDrivingLicenseApp.Size = new System.Drawing.Size(1070, 285);
-            this.dgvDrivingLicenseApp.TabIndex = 24;
+            this.LocalDrivingLicenseApplications.AllowUserToAddRows = false;
+            this.LocalDrivingLicenseApplications.AllowUserToDeleteRows = false;
+            this.LocalDrivingLicenseApplications.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.LocalDrivingLicenseApplications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LocalDrivingLicenseApplications.ContextMenuStrip = this.cmsApplication;
+            this.LocalDrivingLicenseApplications.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LocalDrivingLicenseApplications.Location = new System.Drawing.Point(14, 212);
+            this.LocalDrivingLicenseApplications.Name = "LocalDrivingLicenseApplications";
+            this.LocalDrivingLicenseApplications.ReadOnly = true;
+            this.LocalDrivingLicenseApplications.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.LocalDrivingLicenseApplications.Size = new System.Drawing.Size(1070, 285);
+            this.LocalDrivingLicenseApplications.TabIndex = 24;
             // 
             // cbStatus
             // 
@@ -374,7 +374,7 @@
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.dgvDrivingLicenseApp);
+            this.Controls.Add(this.LocalDrivingLicenseApplications);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmListLocalDrivingLicenseApplication";
@@ -383,7 +383,7 @@
             this.Text = "Local Driving License Application";
             this.Load += new System.EventHandler(this.frmListLocalDrivingLicenseApplication_Load);
             this.cmsApplication.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDrivingLicenseApp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LocalDrivingLicenseApplications)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPeople)).EndInit();
             this.ResumeLayout(false);
@@ -410,7 +410,7 @@
         private System.Windows.Forms.ToolStripMenuItem showDitelsToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip cmsApplication;
         private System.Windows.Forms.ToolStripMenuItem schduletestsToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dgvDrivingLicenseApp;
+        private System.Windows.Forms.DataGridView LocalDrivingLicenseApplications;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox cbStatus;
         private System.Windows.Forms.ToolStripMenuItem issueDirvingLicenseForFirstTimeToolStripMenuItem;

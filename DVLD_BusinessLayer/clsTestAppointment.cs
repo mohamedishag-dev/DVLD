@@ -41,11 +41,11 @@ namespace DVLD_BusinessLayer
             this.TestTypeID = TestTypeID;
             this.TestTypeInfo = clsTestType.Find(this.TestTypeID);
             this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseAppointmentID;
-            this.DrivingLicenseApp = clsLocalDrivingLicenseApplication.Find(LocalDrivingLicenseAppointmentID);
+            this.DrivingLicenseApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseAppointmentID);
             this.AppointmentDate = AppointmentDate;
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUser = clsUser.Find(CreatedByUserID);
+            this.CreatedByUser = clsUser.FindByUserID(CreatedByUserID);
             this.IsLocked = IsLocked;
             this.RetakeTestAppointmentID = RetakeTestAppointmentID;
             this.Mode = enMode.Update;
@@ -114,9 +114,9 @@ namespace DVLD_BusinessLayer
             return clsTestAppointmentData.GetAllTestAppointments();
         }
 
-        public static int GetTestTypeID(int LocalDrivingLicenseAppointmentID)
+        public static int GetPassedTestCount(int LocalDrivingLicenseAppointmentID)
         {
-            return clsTestAppointmentData.GetTestTypeID(LocalDrivingLicenseAppointmentID);
+            return clsTestAppointmentData.GetPassedTestCount(LocalDrivingLicenseAppointmentID);
         }
 
         public static bool IsAppointmentExist(int AppointmentID)
@@ -144,6 +144,15 @@ namespace DVLD_BusinessLayer
         public static bool IsTackTest(int LocalDrivingLicenseTestAppointmentID, int TestTypeID)
         {
             return clsTestAppointmentData.IsTackTest(LocalDrivingLicenseTestAppointmentID, TestTypeID);
+        }
+
+        public static int CountTackTest(int LocalDrivingLicenseTestAppointmentID, int TestTypeID)
+        {
+            return clsTestAppointmentData.CountTackTest(LocalDrivingLicenseTestAppointmentID, TestTypeID);
+        }
+        public static int GetLestRetakeTest()
+        {
+            return clsTestAppointmentData.GetLestRetakeTest();
         }
 
         public static bool IsActiveAppointment(int LocalDrivingLicenseTestAppointmentID)

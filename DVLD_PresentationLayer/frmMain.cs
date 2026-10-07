@@ -67,6 +67,7 @@ namespace DVLD_PresentationLayer
             frmAddUpdateLocalDrivingLicenseApplication frm = new frmAddUpdateLocalDrivingLicenseApplication();
             frm.ShowDialog();
         }
+
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListLocalDrivingLicenseApplication frm = new frmListLocalDrivingLicenseApplication();
@@ -80,6 +81,11 @@ namespace DVLD_PresentationLayer
 
         }
 
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicenseApplication frm = new frmListLocalDrivingLicenseApplication();
+            frm.ShowDialog();
+        }
 
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -87,11 +93,6 @@ namespace DVLD_PresentationLayer
 
         }
 
-        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-        }
 
         private void releaseDetainedDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -123,5 +124,7 @@ namespace DVLD_PresentationLayer
             if (clsGlobal.CurrentUser != null)
                 _frmLogin.Close();
         }
+
+
     }
 }

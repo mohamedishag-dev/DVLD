@@ -15,6 +15,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License
     {
         clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
         private int _LocalDrivingLicenseApplicationID = -1;
+        private int _LicenseID = -1;
         public int LocalDrivingLicenseApplicationID
         {
             get { return _LocalDrivingLicenseApplicationID; }
@@ -25,15 +26,30 @@ namespace DVLD_PresentationLayer.Applications.Local_License
             InitializeComponent();
         }
 
-        public void LoadLocalDrivingLicenseApplicationInfo(int LocalDrivingLicenseApplicationID)
+        public void LoadLocalDrivingLicenseApplicationInfoByApplicationID(int ApplicationID)
         {
-            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByApplicationID(ApplicationID);
             if (_LocalDrivingLicenseApplication == null)
             {
-                _LocalDrivingLicenseApplicationID = -1;
                 ResetLocalDrivingLicenseApplicationInfo();
                 MessageBox.Show("No Application with LocalDrivingLicenseApplicationID = " + _LocalDrivingLicenseApplicationID.ToString(),
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+                _FillLocalDrivingLicenseApplicationInfo();
+
+        }
+ 
+        public void LoadApplicationInfoByLocalDrivingAppID(int LocalDrivingLicenseApplicationID)
+        {
+        
+            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+
+            if (_LocalDrivingLicenseApplication == null)
+            {
+                ResetLocalDrivingLicenseApplicationInfo();
+                MessageBox.Show("No Application with LocalDrivingLicenseApplicationID = " + LocalDrivingLicenseApplicationID.ToString(),
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -62,11 +78,7 @@ namespace DVLD_PresentationLayer.Applications.Local_License
             lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() + "/3";
 
             ctrlApplicationBasicInfo1.LoadApplicationInfo(_LocalDrivingLicenseApplication.ApplicationID);
-
-        }
-
-        private void ctrlDrivingLicenseApplicationInfo_Load(object sender, EventArgs e)
-        {
+            _LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
 
         }
 

@@ -1,7 +1,6 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Data;
-using System.IO;
 using static DVLD_BusinessLayer.clsLicense;
 
 namespace DVLD_BusinessLayer
@@ -19,11 +18,9 @@ namespace DVLD_BusinessLayer
         {
             get
             {
-                return base.PersonInfo.FullName;
+                return clsPerson.Find(ApplicantPersonID).FullName;
             }
         }
-
-
         public clsLocalDrivingLicenseApplication()
         {
             this.LocalDrivingLicenseApplicationID = -1;
@@ -73,6 +70,7 @@ namespace DVLD_BusinessLayer
 
         public static clsLocalDrivingLicenseApplication FindByLocalDrivingAppLicenseID(int LocalDrivingLicenseApplicationID)
         {
+
             int ApplicationID = -1, LicenseClassID = -1;
 
             bool IsFound = clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID
@@ -152,7 +150,7 @@ namespace DVLD_BusinessLayer
             if (!IsLocalDrivingApplicationDeleted)
                 return false;
 
-            IsBaseApplicationDeleted = !base.Delete();
+            IsBaseApplicationDeleted = base.Delete();
             return IsBaseApplicationDeleted;
 
         }
@@ -219,15 +217,62 @@ namespace DVLD_BusinessLayer
                 return License.LicenseID;
             }
             else
-            return -1;
+                return -1;
         }
- 
+
+        public bool DoesAttendTestType(clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DoesAttendTestType(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
+
+        public static bool DoesAttendTestType(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DoesAttendTestType(LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
+
+        public bool DoesPassTestType(clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
+
+        public byte TotalTrialsPerTest(clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.TotalTrialsPerTest(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
+     
+        }
+
+        public static byte TotalTrialsPerTest(int LocalDrivingLicenseApplicationID,clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.TotalTrialsPerTest(LocalDrivingLicenseApplicationID, (int)TestTypeID);
+     
+        }
+
+        public bool IsThereAnActiveScheduledTest(clsTestType.enTestType TestTypeID)
+        {
+
+            return clsLocalDrivingLicenseApplicationData.IsThereAnActiveScheduledTest(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
+
+        public clsTest GetLastTestPerTestType(clsTestType.enTestType TestTypeID)
+        {
+
+            return clsTest.FindLastTestPerPersonAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestTypeID);
+
+        }
+
+        public static bool IsThereAnActiveScheduledTest(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestTypeID)
+        {
+
+            return clsLocalDrivingLicenseApplicationData.IsThereAnActiveScheduledTest(LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
 
         public bool IsLicenseIssued()
         {
-            
+
             return false;
         }
+
+
 
 
 

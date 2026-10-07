@@ -1,6 +1,6 @@
 ﻿namespace DVLD_PresentationLayer.Applications
 {
-    partial class frmListTestAppoinments
+    partial class frmListTestAppointments
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblAppoinments = new System.Windows.Forms.Label();
-            this.dgvAppoinments = new System.Windows.Forms.DataGridView();
+            this.dgvLicenseTestAppointments = new System.Windows.Forms.DataGridView();
             this.cmsAppoinments = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tackTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +41,7 @@
             this.btnAddAppoiment = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.ctrlDrivingLicenseApplicationInfo1 = new DVLD_PresentationLayer.Applications.Local_License.ctrlDrivingLicenseApplicationInfo();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppoinments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLicenseTestAppointments)).BeginInit();
             this.cmsAppoinments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).BeginInit();
             this.SuspendLayout();
@@ -56,19 +56,19 @@
             this.lblAppoinments.TabIndex = 25;
             this.lblAppoinments.Text = "Appoinments";
             // 
-            // dgvAppoinments
+            // dgvLicenseTestAppointments
             // 
-            this.dgvAppoinments.AllowUserToAddRows = false;
-            this.dgvAppoinments.AllowUserToDeleteRows = false;
-            this.dgvAppoinments.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvAppoinments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppoinments.ContextMenuStrip = this.cmsAppoinments;
-            this.dgvAppoinments.Location = new System.Drawing.Point(8, 491);
-            this.dgvAppoinments.Name = "dgvAppoinments";
-            this.dgvAppoinments.ReadOnly = true;
-            this.dgvAppoinments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAppoinments.Size = new System.Drawing.Size(681, 133);
-            this.dgvAppoinments.TabIndex = 23;
+            this.dgvLicenseTestAppointments.AllowUserToAddRows = false;
+            this.dgvLicenseTestAppointments.AllowUserToDeleteRows = false;
+            this.dgvLicenseTestAppointments.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvLicenseTestAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLicenseTestAppointments.ContextMenuStrip = this.cmsAppoinments;
+            this.dgvLicenseTestAppointments.Location = new System.Drawing.Point(8, 491);
+            this.dgvLicenseTestAppointments.Name = "dgvLicenseTestAppointments";
+            this.dgvLicenseTestAppointments.ReadOnly = true;
+            this.dgvLicenseTestAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLicenseTestAppointments.Size = new System.Drawing.Size(681, 133);
+            this.dgvLicenseTestAppointments.TabIndex = 23;
             // 
             // cmsAppoinments
             // 
@@ -170,7 +170,7 @@
             this.ctrlDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(687, 331);
             this.ctrlDrivingLicenseApplicationInfo1.TabIndex = 30;
             // 
-            // frmListTestAppoinments
+            // frmListTestAppointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -180,18 +180,18 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblAppoinments);
             this.Controls.Add(this.btnAddAppoiment);
-            this.Controls.Add(this.dgvAppoinments);
+            this.Controls.Add(this.dgvLicenseTestAppointments);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmListTestAppoinments";
+            this.Name = "frmListTestAppointments";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vision Test Appoinments";
             this.Load += new System.EventHandler(this.frmSechduleTest_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppoinments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLicenseTestAppointments)).EndInit();
             this.cmsAppoinments.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).EndInit();
             this.ResumeLayout(false);
@@ -203,7 +203,7 @@
 
         private System.Windows.Forms.Label lblAppoinments;
         private System.Windows.Forms.Button btnAddAppoiment;
-        private System.Windows.Forms.DataGridView dgvAppoinments;
+        private System.Windows.Forms.DataGridView dgvLicenseTestAppointments;
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;

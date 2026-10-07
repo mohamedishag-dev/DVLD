@@ -20,7 +20,7 @@ namespace DVLD_PresentationLayer
 
         private void frmIssueDirvingLicenseForTheFirstTime_Load(object sender, EventArgs e)
         {
-            ctrlDrivingLicenseApplicationInfo1.LoadLocalDrivingLicenseApplicationInfo(_LocalDrivingLicenseApplicationID);
+            ctrlDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
             _DrivingLicenseApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
         }

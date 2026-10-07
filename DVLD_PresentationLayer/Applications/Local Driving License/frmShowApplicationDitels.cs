@@ -23,7 +23,7 @@ namespace DVLD_PresentationLayer
 
         private void frmShowApplicationDitels_Load(object sender, EventArgs e)
         {
-            ctrlDrivingLicenseApplicationInfo1.LoadLocalDrivingLicenseApplicationInfo(_LocalDrivingLicenseApplicationID);
+            ctrlDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
 
         }
 

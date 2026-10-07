@@ -6,29 +6,50 @@ namespace DVLD_PresentationLayer.Tests
 {
     public partial class frmTakeTest : Form
     {
-        private int _TestAppointmentID;
-        private clsTest _Test = new clsTest();
-        public frmTakeTest(int TestAppointmentID)
+        private clsTest _Test;
+        private int _AppointmentID = -1;
+        private clsTestType.enTestType _TestType = clsTestType.enTestType.VisionTest;
+
+        public frmTakeTest(int AppointmentID, clsTestType.enTestType TestType)
         {
             InitializeComponent();
-            _TestAppointmentID = TestAppointmentID;
-        }
-
-        private void _LoadData()
-        {
-
-            lblFess.Text = _Test.TestAppointmentInfo.PaidFees.ToString();
-            lblDate.Text = _Test.TestAppointmentInfo.AppointmentDate.ToShortDateString();
-            lblD_Class.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.LicenseClassInfo.ClassName.ToString();
-            lblName.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.ApplicationInfo.ApplicantName.ToString();
-            lblAppID.Text = _Test.TestAppointmentInfo.DrivingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
+            _AppointmentID = AppointmentID;
+            _TestType = TestType;
 
         }
 
         private void frmTakeTest_Load(object sender, EventArgs e)
         {
-            _Test.TestAppointmentInfo = clsTestAppointment.Find(_TestAppointmentID);
-            _LoadData();
+
+            ctrlSecheduledTest1.TestTypeID = _TestType;
+
+            ctrlSecheduledTest1.LoadInfo(_AppointmentID);
+
+            if (ctrlSecheduledTest1.TestAppointmentID == -1)
+                btnSave.Enabled = false;
+            else
+                btnSave.Enabled = true;
+
+
+            int _TestID = ctrlSecheduledTest1.TestID;
+            if (_TestID != -1)
+            {
+                _Test = clsTest.Find(_TestID);
+
+                if (_Test.TestResult)
+                    rbPass.Checked = true;
+                else
+                    rbFail.Checked = true;
+                txtNotes.Text = _Test.Notes;
+
+                lblUserMessage.Visible = true;
+                rbFail.Enabled = false;
+                rbPass.Enabled = false;
+            }
+
+            else
+                _Test = new clsTest();
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -39,31 +60,27 @@ namespace DVLD_PresentationLayer.Tests
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            _Test.TestAppointmentID = _Test.TestAppointmentInfo.TestAppointmentID;
+            if (MessageBox.Show("Are you sure you want to Save? Atter that you cannot chanbe the Pass/Fail result you save?.",
+                "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.No)
+                return;
+
+
+            _Test.TestAppointmentID = _AppointmentID;
             _Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             _Test.TestResult = rbPass.Checked;
             _Test.Notes = txtNotes.Text.Trim();
 
-
-            if (MessageBox.Show("Are you sure you want to Save? Atter that you cannot chanbe the Pass/Fail result you save?.",
-                "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+            if (_Test.Save())
             {
-                if (_Test.Save())
-                {
-                    _Test.TestAppointmentInfo.IsLocked = true;
-                    if (_Test.TestAppointmentInfo.Save())
-                    {
-
-                        MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                }
-                else
-                    MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnSave.Enabled = false;
+                this.Close();
             }
+            else
+                MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
+    
     }
 }

@@ -1,5 +1,4 @@
 ﻿using DVLD_Business;
-using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -7,42 +6,32 @@ namespace DVLD.Licenses
 {
     public partial class ctrlDriverLicenseInfo : UserControl
     {
-        private int _LicenseID;
-        private clsLicense LicenseInfo;
-        private string _NationalNo = "";
+        public int LicenseID
+        {
+            get { return _LicenseID; }
+        }
+        private int _LicenseID = -1;
+        private clsLicense _LicenseInfo;
+        public clsLicense SelectedLicenseInfo
+        {
+            get { return _LicenseInfo; }
+        }
 
         public ctrlDriverLicenseInfo()
         {
             InitializeComponent();
         }
 
-        public void LoadLicenseCard(int LicenseID)
+        public void LoadInfo(int LicenseID)
         {
             _LicenseID = LicenseID;
-            LicenseInfo = clsLicense.Find(_LicenseID);
+            _LicenseInfo = clsLicense.Find(_LicenseID);
 
-            if (LicenseInfo == null)
+            if (_LicenseInfo == null)
             {
                 _LicenseID = -1;
-                ResetLicenseInfo();
-                MessageBox.Show("No Person with LicenseID = " + LicenseID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-                _FillLicenseInfo();
-
-        }
-
-        public void LoadLicenseCard(string NationalNo, int LicenseClass)
-        {
-            _NationalNo = NationalNo;
-            LicenseInfo = clsLicense.Find(_NationalNo, LicenseClass);
-
-            if (LicenseInfo == null)
-            {
-                _LicenseID = -1;
-                ResetLicenseInfo();
-                MessageBox.Show("No Person with NationalNo = " + NationalNo.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _RestLicenseInfo();
+                MessageBox.Show("Could not find License ID = " + _LicenseID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -53,12 +42,12 @@ namespace DVLD.Licenses
         private void _LoadLicenseImage()
         {
 
-            if (LicenseInfo.ApplicationInfo.PersonInfo.Gendor == 0)
+            if (_LicenseInfo.DriverInfo.PersonInfo.Gendor == 0)
                 imgPerson.Image = Properties.Resources.Male_512;
             else
                 imgPerson.Image = Properties.Resources.Female_512;
 
-            string ImagePath = LicenseInfo.ApplicationInfo.PersonInfo.ImagePath;
+            string ImagePath = _LicenseInfo.DriverInfo.PersonInfo.ImagePath;
             if (ImagePath != "")
                 if (File.Exists(ImagePath))
                     imgPerson.ImageLocation = ImagePath;
@@ -69,51 +58,44 @@ namespace DVLD.Licenses
 
         private void _FillLicenseInfo()
         {
-            _LicenseID = -1;
-            lbClass.Text = LicenseInfo.LicenseClassInfo.ClassName;
-            lblName.Text = LicenseInfo.ApplicationInfo.ApplicantName;
-            lblLicenseID.Text = LicenseInfo.LicenseID.ToString();
-            lblNationailNO.Text = LicenseInfo.ApplicationInfo.PersonInfo.NationalNo;
-            lblGedor.Text = LicenseInfo.ApplicationInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
-            lblIssueDate.Text = LicenseInfo.IssueDate.ToShortDateString();
-            lblIssueReason.Text = LicenseInfo.IssueReasonText;
+            lbClass.Text = _LicenseInfo.LicenseClassInfo.ClassName;
+            lblName.Text = _LicenseInfo.DriverInfo.PersonInfo.FullName;
+            lblLicenseID.Text = _LicenseInfo.LicenseID.ToString();
+            lblNationailNO.Text = _LicenseInfo.DriverInfo.PersonInfo.NationalNo;
+            lblGedor.Text = _LicenseInfo.DriverInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
+            lblIssueDate.Text = _LicenseInfo.IssueDate.ToShortDateString();
+            lblIssueReason.Text = _LicenseInfo.IssueReasonText;
+            lblNotes.Text = _LicenseInfo.Notes == "" ? "No Notes" : _LicenseInfo.Notes;
 
-            if (LicenseInfo.Notes != "")
-                lblNotes.Text = LicenseInfo.Notes;
-            else
-                lblNotes.Text = "No Notes";
-
-            lblIsActive.Text = LicenseInfo.IsActive == true ? "Yes" : "No";
-            lblDateOfBrith.Text = LicenseInfo.ApplicationInfo.PersonInfo.DateOfBirth.ToShortDateString();
-            lblDriverID.Text = LicenseInfo.DriverID.ToString();
-            lblExpirationDate.Text = LicenseInfo.ExpirationDate.ToShortDateString();
-            lblIsDetained.Text = LicenseInfo.IsActive == true ? "No" : "Yes";
+            lblIsActive.Text = _LicenseInfo.IsActive ? "Yes" : "No";
+            lblDateOfBrith.Text = _LicenseInfo.DriverInfo.PersonInfo.DateOfBirth.ToShortDateString();
+            lblDriverID.Text = _LicenseInfo.DriverID.ToString();
+            lblExpirationDate.Text = _LicenseInfo.ExpirationDate.ToShortDateString();
+            lblIsDetained.Text = _LicenseInfo.IsDetained ? "Yes" : "No";
 
             _LoadLicenseImage();
 
         }
 
-        public void ResetLicenseInfo()
+        private void _RestLicenseInfo()
         {
-            _LicenseID = -1;
-            lbClass.Text = "N/A";
-            lblName.Text = "N/A";
-            lblLicenseID.Text = "N/A";
-            lblNationailNO.Text = "N/A";
-            lblGedor.Text = "N/A";
-            lblIssueDate.Text = "N/A";
-            lblIssueReason.Text = "N/A";
+            lbClass.Text = "[???]";
+            lblName.Text = "[???]";
+            lblLicenseID.Text = "[???]";
+            lblNationailNO.Text = "[???]";
+            lblGedor.Text = "[???]";
+            lblIssueDate.Text = "[???]";
+            lblIssueReason.Text = "[???]";
             lblNotes.Text = "No Notes";
-
-            lblIsActive.Text = "N/A";
-            lblDateOfBrith.Text = "N/A";
-            lblDriverID.Text = "N/A";
-            lblExpirationDate.Text = "N/A";
-            lblIsDetained.Text = "N/A";
-
+            lblIsActive.Text = "[???]";
+            lblDateOfBrith.Text = "[???]";
+            lblDriverID.Text = "[???]";
+            lblExpirationDate.Text = "[???]";
+            lblIsDetained.Text = "[???]";
             imgPerson.Image = Properties.Resources.Male_512;
+
         }
 
-
+    
     }
 }

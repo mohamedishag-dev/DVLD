@@ -292,11 +292,23 @@ namespace DVLD.Tests
 
         private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string NationalNo = (string)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[2].Value;
-            int LicenseClassID = clsLicenseClass.Find((string)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[1].Value).LecenseClassID;
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            frmShowLicense frm = new frmShowLicense(NationalNo, LicenseClassID);
-            frm.ShowDialog();
+            int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
+               LocalDrivingLicenseApplicationID).GetActiveLicenseID();
+
+            if (LicenseID != -1)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frm.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
         }
 

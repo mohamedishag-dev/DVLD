@@ -237,9 +237,9 @@
             this.lblStatusDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStatusDate.Location = new System.Drawing.Point(434, 54);
             this.lblStatusDate.Name = "lblStatusDate";
-            this.lblStatusDate.Size = new System.Drawing.Size(49, 16);
+            this.lblStatusDate.Size = new System.Drawing.Size(91, 16);
             this.lblStatusDate.TabIndex = 176;
-            this.lblStatusDate.Text = "[????]";
+            this.lblStatusDate.Text = "[??/??/????]";
             // 
             // lblCreatedBy
             // 

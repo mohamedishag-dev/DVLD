@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 
 namespace DVLD_DataAccess
 {
-    public class clsLecenseClassData
+    public class clsLicenseClassData
     {
-        public static bool GetLecenseClassInfoByID(int LecenseClassID,
+        public static bool GetLicenseClassInfoByID(int LecenseClassID,
             ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge,
-            ref byte DefaultValidityLength, ref float Fees)
+            ref byte DefaultValidityLength, ref float ClassFees)
         {
 
             bool isFound = false;
@@ -35,7 +35,7 @@ namespace DVLD_DataAccess
                     ClassDescription = (string)reader["ClassDescription"];
                     MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
                     DefaultValidityLength = (byte)reader["DefaultValidityLength"];
-                    Fees = Convert.ToSingle(reader["ClassFees"]);
+                    ClassFees = Convert.ToSingle(reader["ClassFees"]);
 
                 }
                 else
@@ -62,9 +62,9 @@ namespace DVLD_DataAccess
             return isFound;
         }
 
-        public static bool GetLecenseClassInfoByClassName(string ClassName,
+        public static bool GetLicenseClassInfoByClassName(string ClassName,
             ref int LicenseClassID, ref string ClassDescription, ref byte MinimumAllowedAge,
-            ref byte DefaultValidityLength, ref float Fees)
+            ref byte DefaultValidityLength, ref float ClassFees)
         {
 
             bool isFound = false;
@@ -91,7 +91,7 @@ namespace DVLD_DataAccess
                     ClassDescription = (string)reader["ClassDescription"];
                     MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
                     DefaultValidityLength = (byte)reader["DefaultValidityLength"];
-                    Fees = Convert.ToSingle(reader["ClassFees"]);
+                    ClassFees = Convert.ToSingle(reader["ClassFees"]);
 
                 }
                 else
@@ -125,7 +125,7 @@ namespace DVLD_DataAccess
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"SELECT * FROM LicenseClasses
-                             ORDER BY ClassName";
+                              ORDER BY ClassName";
 
             SqlCommand command = new SqlCommand(query, connection);
 

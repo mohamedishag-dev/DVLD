@@ -31,8 +31,8 @@
             this.lblTital = new System.Windows.Forms.Label();
             this.imgPeople = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.ctrlPersonWithFilter1 = new DVLD.ctrlPersonCardWithFilter();
             this.ctrlDriverLicenses1 = new DVLD.Applications.Internatioal_License.Controls.ctrlDriverLicenses();
+            this.ctrlPersonWithFilter1 = new DVLD.ctrlPersonCardWithFilter();
             ((System.ComponentModel.ISupportInitialize)(this.imgPeople)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,6 +71,13 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // ctrlDriverLicenses1
+            // 
+            this.ctrlDriverLicenses1.Location = new System.Drawing.Point(12, 366);
+            this.ctrlDriverLicenses1.Name = "ctrlDriverLicenses1";
+            this.ctrlDriverLicenses1.Size = new System.Drawing.Size(911, 228);
+            this.ctrlDriverLicenses1.TabIndex = 29;
+            // 
             // ctrlPersonWithFilter1
             // 
             this.ctrlPersonWithFilter1.FilterEnabled = true;
@@ -79,13 +86,6 @@
             this.ctrlPersonWithFilter1.ShowAddPerson = true;
             this.ctrlPersonWithFilter1.Size = new System.Drawing.Size(746, 327);
             this.ctrlPersonWithFilter1.TabIndex = 27;
-            // 
-            // ctrlDriverLicenses1
-            // 
-            this.ctrlDriverLicenses1.Location = new System.Drawing.Point(12, 366);
-            this.ctrlDriverLicenses1.Name = "ctrlDriverLicenses1";
-            this.ctrlDriverLicenses1.Size = new System.Drawing.Size(911, 228);
-            this.ctrlDriverLicenses1.TabIndex = 29;
             // 
             // frmLicenseHistory
             // 

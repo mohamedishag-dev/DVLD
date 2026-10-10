@@ -14,8 +14,7 @@ namespace DVLD_Business
         public int PersonID { set; get; }
         public clsPerson PersonInfo { set; get; }
         public int CreatedByUserID { set; get; }
-        public clsUser CreatedByUser { set; get; }
-        public DateTime CreatedDate { set; get; }
+        public DateTime CreatedDate { get; }
 
         public clsDriver()
         {
@@ -32,7 +31,6 @@ namespace DVLD_Business
             this.PersonID = PersonID;
             this.PersonInfo = clsPerson.Find(PersonID);
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUser = clsUser.FindByUserID(CreatedByUserID);
             this.CreatedDate = CreatedDate;
             this.Mode = enMode.Update;
         }
@@ -62,15 +60,10 @@ namespace DVLD_Business
             return false;
         }
 
-        public bool Delete()
-        {
-            return clsDriverData.DeleteDriver(this.DriverID);
-        }
-
         private bool _AddNewDriver()
         {
 
-            this.DriverID = clsDriverData.AddNewDriver(this.PersonID, this.CreatedByUserID, this.CreatedDate);
+            this.DriverID = clsDriverData.AddNewDriver(this.PersonID, this.CreatedByUserID);
 
             return (this.DriverID != -1);
 
@@ -88,7 +81,7 @@ namespace DVLD_Business
             return clsDriverData.GetAllDrivers();
         }
 
-        public static clsDriver Find(int DriverID)
+        public static clsDriver FindByDriverID(int DriverID)
         {
 
             DateTime CreatedDate = DateTime.Now;
@@ -112,16 +105,6 @@ namespace DVLD_Business
                 return null;
         }
 
-        public static bool IsDriverExist(int DriverID)
-        {
-            return clsDriverData.IsDriverExist(DriverID);
-        }
-
-        public static bool IsDriverExist(string NationalNo)
-        {
-            return clsDriverData.IsDriverExistForNationalNo(NationalNo);
-        }
-    
     }
 
 }

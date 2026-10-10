@@ -1,4 +1,5 @@
-﻿using DVLD_Business;
+﻿using DVLD.Licenses;
+using DVLD_Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,6 @@ namespace DVLD.Applications.Local_License
     {
         clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
         private int _LocalDrivingLicenseApplicationID = -1;
-        private int _LicenseID = -1;
         public int LocalDrivingLicenseApplicationID
         {
             get { return _LocalDrivingLicenseApplicationID; }
@@ -66,7 +66,7 @@ namespace DVLD.Applications.Local_License
             lblAppID.Text = "N/A";
             lblAppliedForLicense.Text = "[????]";
             lblPassedTests.Text = "[????]";
-
+            llShowLicenseInfo.Enabled = false;
         }
 
         private void _FillLocalDrivingLicenseApplicationInfo()
@@ -79,9 +79,14 @@ namespace DVLD.Applications.Local_License
 
             ctrlApplicationBasicInfo1.LoadApplicationInfo(_LocalDrivingLicenseApplication.ApplicationID);
             _LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
-
+            llShowLicenseInfo.Enabled = _LocalDrivingLicenseApplication.IsLicenseIssued();
         }
 
+        private void llShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmShowLicenseInfo frm = new frmShowLicenseInfo(_LocalDrivingLicenseApplication.GetActiveLicenseID());
+            frm.ShowDialog();
+        }
 
     }
 }

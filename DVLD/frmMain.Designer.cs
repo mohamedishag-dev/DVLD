@@ -228,6 +228,7 @@
             this.manageDatainedLicensesToolStripMenuItem.Name = "manageDatainedLicensesToolStripMenuItem";
             this.manageDatainedLicensesToolStripMenuItem.Size = new System.Drawing.Size(222, 38);
             this.manageDatainedLicensesToolStripMenuItem.Text = "Manage Datained Licenses";
+            this.manageDatainedLicensesToolStripMenuItem.Click += new System.EventHandler(this.manageDatainedLicensesToolStripMenuItem_Click);
             // 
             // datainLicenseToolStripMenuItem1
             // 
@@ -237,6 +238,7 @@
             this.datainLicenseToolStripMenuItem1.Name = "datainLicenseToolStripMenuItem1";
             this.datainLicenseToolStripMenuItem1.Size = new System.Drawing.Size(222, 38);
             this.datainLicenseToolStripMenuItem1.Text = "Datain License";
+            this.datainLicenseToolStripMenuItem1.Click += new System.EventHandler(this.datainLicenseToolStripMenuItem1_Click);
             // 
             // releaseDatainLicenseToolStripMenuItem
             // 
@@ -246,6 +248,7 @@
             this.releaseDatainLicenseToolStripMenuItem.Name = "releaseDatainLicenseToolStripMenuItem";
             this.releaseDatainLicenseToolStripMenuItem.Size = new System.Drawing.Size(222, 38);
             this.releaseDatainLicenseToolStripMenuItem.Text = "Release Datained License";
+            this.releaseDatainLicenseToolStripMenuItem.Click += new System.EventHandler(this.releaseDatainLicenseToolStripMenuItem_Click);
             // 
             // manageApplicationTypesToolStripMenuItem
             // 

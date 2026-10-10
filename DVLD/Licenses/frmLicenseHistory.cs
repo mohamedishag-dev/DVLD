@@ -27,10 +27,12 @@ namespace DVLD.Licenses
 
         private void frmLicenseHistory_Load(object sender, EventArgs e)
         {
-            ctrlDriverLicenses1.LoadLicenses(_PersonID);
+            ctrlDriverLicenses1.LoadLicensesByPersonID(_PersonID);
             ctrlPersonWithFilter1.FilterEnabled = false;
             ctrlPersonWithFilter1.LoadPersonInfo(_PersonID);
+
         }
+
 
 
     }

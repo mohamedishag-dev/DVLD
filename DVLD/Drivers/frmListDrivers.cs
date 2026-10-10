@@ -1,4 +1,6 @@
-﻿using DVLD_Business;
+﻿using DVLD.Licenses;
+using DVLD.People;
+using DVLD_Business;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -7,7 +9,7 @@ namespace DVLD
 {
     public partial class frmListDrivers : Form
     {
-        private static DataTable _dtAllDrivers = clsDriver.GetAllDrivers();
+        private static DataTable _dtAllDrivers;
         public frmListDrivers()
         {
             InitializeComponent();
@@ -15,6 +17,7 @@ namespace DVLD
 
         private void frmDrivers_Load(object sender, EventArgs e)
         {
+            _dtAllDrivers = clsDriver.GetAllDrivers();
             dgvDrivers.DataSource = _dtAllDrivers;
             cbFilterBy.SelectedIndex = 0;
 
@@ -159,5 +162,29 @@ namespace DVLD
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowPersonInfo frm = new frmShowPersonInfo((int)dgvDrivers.CurrentRow.Cells[1].Value);
+            frm.ShowDialog();
+
+        }
+
+        private void issueInternationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLicenseHistory frm = new frmLicenseHistory((int)dgvDrivers.CurrentRow.Cells[1].Value);
+            frm.ShowDialog();
+        }
+
+        private void dgvDrivers_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            frmShowPersonInfo frm = new frmShowPersonInfo((int)dgvDrivers.CurrentRow.Cells[1].Value);
+            frm.ShowDialog();
+        }
     }
 }

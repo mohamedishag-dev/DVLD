@@ -181,7 +181,7 @@ namespace DVLD_Business
                 Driver = new clsDriver();
 
                 Driver.PersonID = this.ApplicantPersonID;
-                Driver.CreatedByUser = this.CreatedByUser;
+                Driver.CreatedByUserID = this.CreatedByUserID;
                 if (Driver.Save())
                 {
                     DriverID = Driver.DriverID;
@@ -238,13 +238,13 @@ namespace DVLD_Business
         public byte TotalTrialsPerTest(clsTestType.enTestType TestTypeID)
         {
             return clsLocalDrivingLicenseApplicationData.TotalTrialsPerTest(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
-     
+
         }
 
-        public static byte TotalTrialsPerTest(int LocalDrivingLicenseApplicationID,clsTestType.enTestType TestTypeID)
+        public static byte TotalTrialsPerTest(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestTypeID)
         {
             return clsLocalDrivingLicenseApplicationData.TotalTrialsPerTest(LocalDrivingLicenseApplicationID, (int)TestTypeID);
-     
+
         }
 
         public bool IsThereAnActiveScheduledTest(clsTestType.enTestType TestTypeID)
@@ -268,17 +268,18 @@ namespace DVLD_Business
 
         public bool IsLicenseIssued()
         {
-
-            return false;
+            return (GetActiveLicenseID() != -1);
         }
 
-
-
-
-
-        public static bool IsApplicationExist(int ApplicantPersonID, int LicenseClassID)
+        public int GetActiveLicenseID()
         {
-            return clsLocalDrivingLicenseApplicationData.IsLocalDrivingLicenseApplicationExistForApplicationIdAndLicenseClassID(ApplicantPersonID, LicenseClassID);
+            //this will get the license id that belongs to this application
+            return clsLicense.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID);
+        }
+
+        public bool PassedAllTests()
+        {
+            return clsTest.PassedAllTests(this.LocalDrivingLicenseApplicationID);
         }
 
         public static bool IsCompleted(int LocalDrivingLicenseApplicationID)

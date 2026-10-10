@@ -44,7 +44,7 @@
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(581, 120);
-            this.txtNotes.TabIndex = 2;
+            this.txtNotes.TabIndex = 0;
             // 
             // lblNotes
             // 
@@ -74,7 +74,7 @@
             this.btnClose.Location = new System.Drawing.Point(478, 493);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(106, 38);
-            this.btnClose.TabIndex = 1;
+            this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@
             this.btnIssue.Location = new System.Drawing.Point(590, 493);
             this.btnIssue.Name = "btnIssue";
             this.btnIssue.Size = new System.Drawing.Size(106, 38);
-            this.btnIssue.TabIndex = 0;
+            this.btnIssue.TabIndex = 1;
             this.btnIssue.Text = "Issue";
             this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnIssue.UseVisualStyleBackColor = true;

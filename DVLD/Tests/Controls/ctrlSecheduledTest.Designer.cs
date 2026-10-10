@@ -122,9 +122,9 @@
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.Location = new System.Drawing.Point(141, 286);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(17, 18);
+            this.lblDate.Size = new System.Drawing.Size(100, 18);
             this.lblDate.TabIndex = 210;
-            this.lblDate.Text = "0";
+            this.lblDate.Text = "[??/??/????]";
             // 
             // labelRTestAppID
             // 

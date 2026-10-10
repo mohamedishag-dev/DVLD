@@ -1,4 +1,8 @@
 ﻿using DVLD;
+using DVLD.Applications.Renew_Local_License;
+using DVLD.Applications.Replace_Lost_Or_Demaged_License;
+using DVLD.Applications.Rlease_Detained_License;
+using DVLD.Licenses.International_Licenses;
 using DVLD.Tests;
 using DVLD.Users;
 using System;
@@ -87,35 +91,60 @@ namespace DVLD
             frm.ShowDialog();
         }
 
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueInternationalLicense frm = new frmIssueInternationalLicense();
+            frm.ShowDialog();
+
+        }
+
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-        }
-
-
-        private void releaseDetainedDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-        }
-
-        private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmInternationalLicensesApplications frm = new frmInternationalLicensesApplications();
+            frm.ShowDialog();
 
         }
 
         private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmRenewLocalLicenseApplication frm = new frmRenewLocalLicenseApplication();
+            frm.ShowDialog();
 
         }
 
-
-        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmReplacementforDamagedDrivingLicense frm = new frmReplacementforDamagedDrivingLicense();
+            frm.ShowDialog();
+
+        }
+
+        private void datainLicenseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDetainedLicense frm = new frmDetainedLicense();
+            frm.ShowDialog();
+
+        }
+
+        private void releaseDatainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.ShowDialog();
+
+        }
+
+        private void manageDatainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frm = new frmListDetainedLicenses();
+            frm.ShowDialog();
+
+        }
+
+        private void releaseDetainedDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.ShowDialog();
 
         }
 
@@ -124,7 +153,6 @@ namespace DVLD
             if (clsGlobal.CurrentUser != null)
                 _frmLogin.Close();
         }
-
-
+    
     }
 }

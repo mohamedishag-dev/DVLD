@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BBB87E1E-C952-425A-9013-1E7D1ABF0087}|DVLD.csproj|e:\\progarmmingadvises\\profects\\dvld\\dvld\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBB87E1E-C952-425A-9013-1E7D1ABF0087}|DVLD.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEA427C-17B5-41F8-AC19-882216588D43}|..\\DVLD_DataAccess\\DVLD_DataAccess.csproj|e:\\progarmmingadvises\\profects\\dvld\\dvld_dataaccess\\clsdetainedlicensedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBB87E1E-C952-425A-9013-1E7D1ABF0087}|DVLD.csproj|e:\\progarmmingadvises\\profects\\dvld\\dvld\\applications\\rlease detained license\\frmreleasedetainedlicense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBB87E1E-C952-425A-9013-1E7D1ABF0087}|DVLD.csproj|solutionrelative:applications\\rlease detained license\\frmreleasedetainedlicense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmReleaseDetainedLicense.cs",
+              "DocumentMoniker": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD\\Applications\\Rlease Detained License\\frmReleaseDetainedLicense.cs",
+              "RelativeDocumentMoniker": "Applications\\Rlease Detained License\\frmReleaseDetainedLicense.cs",
+              "ToolTip": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD\\Applications\\Rlease Detained License\\frmReleaseDetainedLicense.cs",
+              "RelativeToolTip": "Applications\\Rlease Detained License\\frmReleaseDetainedLicense.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAgwDsAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-10T20:23:10.519Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "clsDetainedLicenseData.cs",
+              "DocumentMoniker": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD_DataAccess\\clsDetainedLicenseData.cs",
+              "RelativeDocumentMoniker": "..\\DVLD_DataAccess\\clsDetainedLicenseData.cs",
+              "ToolTip": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD_DataAccess\\clsDetainedLicenseData.cs",
+              "RelativeToolTip": "..\\DVLD_DataAccess\\clsDetainedLicenseData.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAQwGoAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-10T21:31:55.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "E:\\ProgarmmingAdvises\\Profects\\DVLD\\DVLD\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-10T20:20:33.981Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

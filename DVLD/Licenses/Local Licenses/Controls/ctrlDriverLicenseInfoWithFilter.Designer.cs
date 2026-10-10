@@ -31,7 +31,7 @@
             this.gbFilters = new System.Windows.Forms.GroupBox();
             this.btnFindLicense = new System.Windows.Forms.Button();
             this.lblLicenseID = new System.Windows.Forms.Label();
-            this.txtFilterValue = new System.Windows.Forms.TextBox();
+            this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.ctrlDriverLicenseInfo1 = new DVLD.Licenses.ctrlDriverLicenseInfo();
             this.gbFilters.SuspendLayout();
             this.SuspendLayout();
@@ -40,11 +40,11 @@
             // 
             this.gbFilters.Controls.Add(this.btnFindLicense);
             this.gbFilters.Controls.Add(this.lblLicenseID);
-            this.gbFilters.Controls.Add(this.txtFilterValue);
+            this.gbFilters.Controls.Add(this.txtLicenseID);
             this.gbFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbFilters.Location = new System.Drawing.Point(3, 13);
+            this.gbFilters.Location = new System.Drawing.Point(3, 3);
             this.gbFilters.Name = "gbFilters";
-            this.gbFilters.Size = new System.Drawing.Size(426, 60);
+            this.gbFilters.Size = new System.Drawing.Size(485, 60);
             this.gbFilters.TabIndex = 0;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
@@ -54,7 +54,7 @@
             this.btnFindLicense.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFindLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindLicense.Image = global::DVLD.Properties.Resources.License_View_32;
-            this.btnFindLicense.Location = new System.Drawing.Point(361, 16);
+            this.btnFindLicense.Location = new System.Drawing.Point(411, 16);
             this.btnFindLicense.Name = "btnFindLicense";
             this.btnFindLicense.Size = new System.Drawing.Size(43, 34);
             this.btnFindLicense.TabIndex = 1;
@@ -71,21 +71,21 @@
             this.lblLicenseID.TabIndex = 21;
             this.lblLicenseID.Text = "LicenseID:";
             // 
-            // txtFilterValue
+            // txtLicenseID
             // 
-            this.txtFilterValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtFilterValue.Location = new System.Drawing.Point(102, 22);
-            this.txtFilterValue.Name = "txtFilterValue";
-            this.txtFilterValue.Size = new System.Drawing.Size(236, 26);
-            this.txtFilterValue.TabIndex = 0;
-            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
+            this.txtLicenseID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtLicenseID.Location = new System.Drawing.Point(121, 22);
+            this.txtLicenseID.Name = "txtLicenseID";
+            this.txtLicenseID.Size = new System.Drawing.Size(262, 26);
+            this.txtLicenseID.TabIndex = 0;
+            this.txtLicenseID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLicenseID_KeyPress);
             // 
             // ctrlDriverLicenseInfo1
             // 
-            this.ctrlDriverLicenseInfo1.Location = new System.Drawing.Point(3, 79);
+            this.ctrlDriverLicenseInfo1.Location = new System.Drawing.Point(3, 69);
             this.ctrlDriverLicenseInfo1.Name = "ctrlDriverLicenseInfo1";
-            this.ctrlDriverLicenseInfo1.Size = new System.Drawing.Size(786, 322);
-            this.ctrlDriverLicenseInfo1.TabIndex = 0;
+            this.ctrlDriverLicenseInfo1.Size = new System.Drawing.Size(786, 272);
+            this.ctrlDriverLicenseInfo1.TabIndex = 1;
             // 
             // ctrlDriverLicenseInfoWithFilter
             // 
@@ -94,7 +94,7 @@
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ctrlDriverLicenseInfo1);
             this.Name = "ctrlDriverLicenseInfoWithFilter";
-            this.Size = new System.Drawing.Size(791, 401);
+            this.Size = new System.Drawing.Size(791, 345);
             this.gbFilters.ResumeLayout(false);
             this.gbFilters.PerformLayout();
             this.ResumeLayout(false);
@@ -107,6 +107,6 @@
         private System.Windows.Forms.GroupBox gbFilters;
         private System.Windows.Forms.Button btnFindLicense;
         private System.Windows.Forms.Label lblLicenseID;
-        private System.Windows.Forms.TextBox txtFilterValue;
+        private System.Windows.Forms.TextBox txtLicenseID;
     }
 }

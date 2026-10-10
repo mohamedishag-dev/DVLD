@@ -158,7 +158,7 @@ namespace DVLD_DataAccess
             return (rowsAffected > 0);
         }
 
-        public static int AddNewDriver(int PersonID, int CreatedByUserID, DateTime CreatedDate)
+        public static int AddNewDriver(int PersonID, int CreatedByUserID)
         {
             //this function will return the new Driver id if succeeded and -1 if not.
             int DriverID = -1;
@@ -172,7 +172,7 @@ namespace DVLD_DataAccess
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@PersonID", PersonID);
-            command.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+            command.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
 
             try
@@ -204,124 +204,13 @@ namespace DVLD_DataAccess
             return DriverID;
         }
 
-        public static bool IsDriverExistForNationalNo(string NationalNo)
-        {
-            bool isFound = false;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"SELECT Found=1 FROM  
-                            Drivers INNER JOIN People ON Drivers.PersonID = People.PersonID 
-                              WHERE People.NationalNo = @NationalNo";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@NationalNo", NationalNo);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                isFound = reader.HasRows;
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isFound;
-        }
-
-        public static bool DeleteDriver(int DriverID)
-        {
-
-            int rowsAffected = 0;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"Delete Drivers 
-                              WHERE DriverID = @DriverID;";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@DriverID", DriverID);
-
-            try
-            {
-                connection.Open();
-
-                rowsAffected = command.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-            finally
-            {
-
-                connection.Close();
-
-            }
-
-            return (rowsAffected > 0);
-
-        }
-
-        public static bool IsDriverExist(int DriverID)
-        {
-            bool isFound = false;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = "SELECT Found=1 FROM Drivers WHERE DriverID = @DriverID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@DriverID", DriverID);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                isFound = reader.HasRows;
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isFound;
-        }
-
         public static DataTable GetAllDrivers()
         {
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT DISTINCT D.DriverID, People.PersonID, People.NationalNo,
-                                    People.FirstName+' '+People.SecondName+' '+People.ThirdName+' '+People.LastName AS FullName,
-                                    D.CreatedDate,(SELECT COUNT( *) FROM Licenses
-                              WHERE Licenses.DriverID = D.DriverID AND IsActive = 1) AS IsActive
-                               FROM Drivers D INNER JOIN
-                                    People ON D.PersonID = People.PersonID INNER JOIN
-                                    Licenses ON D.DriverID = Licenses.DriverID
-                              ORDER BY FullName";
+            string query = "SELECT * FROM Drivers_View ORDER BY FullName";
 
             SqlCommand command = new SqlCommand(query, connection);
 

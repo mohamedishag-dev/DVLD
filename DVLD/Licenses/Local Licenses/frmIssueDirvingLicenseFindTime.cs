@@ -18,6 +18,30 @@ namespace DVLD
 
         private void frmIssueDirvingLicenseForTheFirstTime_Load(object sender, EventArgs e)
         {
+            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            if (_LocalDrivingLicenseApplication == null)
+            {
+                MessageBox.Show("No application with ID="+ _LocalDrivingLicenseApplicationID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
+           
+            if (!_LocalDrivingLicenseApplication.PassedAllTests())
+            {
+                MessageBox.Show("Person Should Pass All Tests First.", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
+            int LicenseID = _LocalDrivingLicenseApplication.GetActiveLicenseID();
+            if (LicenseID != -1)
+            {
+                MessageBox.Show("Person already has License before with LicenseID="+ LicenseID, "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
             ctrlDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
             _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
@@ -30,26 +54,24 @@ namespace DVLD
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
-            // minimal null checks
-            if (_LocalDrivingLicenseApplication == null)
-            {
-                MessageBox.Show("Driving license application not loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            string Notes = txtNotes.Text.Trim();
-            int CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            int LicenseID = _LocalDrivingLicenseApplication.IssueLicenseForTheFirstTime(Notes, CreatedByUserID);
+            if (MessageBox.Show("Are you sure you want to issue the license!", "Confirm",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+
+            int LicenseID = _LocalDrivingLicenseApplication.IssueLicenseForTheFirstTime(txtNotes.Text.Trim(), clsGlobal.CurrentUser.UserID);
 
             if (LicenseID != -1)
             {
-                MessageBox.Show(string.Format("Saved License ID = {0}", LicenseID));
+                MessageBox.Show("License Issued Successfully with ID = "+ LicenseID, "Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
-                MessageBox.Show("Erorr: donot Saved License");
+                MessageBox.Show("License was not Issued!","Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
+       
     }
 }

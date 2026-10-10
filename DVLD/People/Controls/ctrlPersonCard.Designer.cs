@@ -109,9 +109,9 @@
             this.lblDateOfBrith.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateOfBrith.Location = new System.Drawing.Point(436, 134);
             this.lblDateOfBrith.Name = "lblDateOfBrith";
-            this.lblDateOfBrith.Size = new System.Drawing.Size(54, 18);
+            this.lblDateOfBrith.Size = new System.Drawing.Size(100, 18);
             this.lblDateOfBrith.TabIndex = 77;
-            this.lblDateOfBrith.Text = "[????]";
+            this.lblDateOfBrith.Text = "[??/??/????]";
             // 
             // lblCountry
             // 

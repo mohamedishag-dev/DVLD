@@ -17,8 +17,8 @@ namespace DVLD_Business
             this.LecenseClassID = -1;
             this.ClassName = "";
             this.ClassDescription = "";
-            this.MinimumAllowedAge = 0;
-            this.DefaultValidityLength = 0;
+            this.MinimumAllowedAge = 18;
+            this.DefaultValidityLength = 10;
             this.ClassFees = 0;
         }
 
@@ -39,7 +39,7 @@ namespace DVLD_Business
             string ClassName = "", ClassDescription = "";
             byte MinimumAllowedAge = 0, DefaultValidityLength = 0;
 
-            if (clsLecenseClassData.GetLecenseClassInfoByID(LecenseClassID, ref ClassName, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
+            if (clsLicenseClassData.GetLicenseClassInfoByID(LecenseClassID, ref ClassName, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
                 return new clsLicenseClass(LecenseClassID, ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees);
             else
                 return null;
@@ -52,7 +52,7 @@ namespace DVLD_Business
             string ClassDescription = "";
             byte MinimumAllowedAge = 0, DefaultValidityLength = 0;
 
-            if (clsLecenseClassData.GetLecenseClassInfoByClassName(ClassName, ref LecenseClassID, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
+            if (clsLicenseClassData.GetLicenseClassInfoByClassName(ClassName, ref LecenseClassID, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
                 return new clsLicenseClass(LecenseClassID, ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees);
             else
                 return null;
@@ -60,10 +60,8 @@ namespace DVLD_Business
 
         public static DataTable GetAllLecenseClasss()
         {
-            return clsLecenseClassData.GetAllLicenseClasses();
+            return clsLicenseClassData.GetAllLicenseClasses();
         }
 
-
     }
-
 }

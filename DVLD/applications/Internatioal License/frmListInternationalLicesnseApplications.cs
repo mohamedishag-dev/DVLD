@@ -1,16 +1,15 @@
 ﻿using DVLD.People;
 using DVLD_Business;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
 namespace DVLD.Licenses.International_Licenses
 {
-    public partial class frmInternationalLicensesApplications : Form
+    public partial class frmListInternationalLicesnseApplications : Form
     {
-        private DataTable _GetAllInternationalLicenses;
-        public frmInternationalLicensesApplications()
+        private DataTable _InternationalLicenses;
+        public frmListInternationalLicesnseApplications()
         {
             InitializeComponent();
         }
@@ -19,37 +18,31 @@ namespace DVLD.Licenses.International_Licenses
         {
             int LicenseID = (int)dgvInternationalLicenses.CurrentRow.Cells[3].Value;
 
-            if (LicenseID != -1)
-            {
-                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
-                frm.ShowDialog();
-
-            }
-            else
+            if (LicenseID == -1)
             {
                 MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+            frm.ShowDialog();
 
         }
 
         private void showDitelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             int PersonID = clsApplication.FindBaseApplication
                 ((int)dgvInternationalLicenses.CurrentRow.Cells[1].Value).ApplicantPersonID;
 
-            if (PersonID != -1)
-            {
-                frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
-                frm.ShowDialog();
-
-            }
-            else
+            if (PersonID == -1)
             {
                 MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
+            frm.ShowDialog();
 
         }
 
@@ -68,7 +61,6 @@ namespace DVLD.Licenses.International_Licenses
         private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
         {
             //we allow number incase person id or user id is selected.
-            // if (cbFilterBy.Text == "L.D.L.AppID")
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
         }
@@ -76,7 +68,7 @@ namespace DVLD.Licenses.International_Licenses
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            _GetAllInternationalLicenses.DefaultView.RowFilter = "";
+            _InternationalLicenses.DefaultView.RowFilter = "";
             lblRecordsCount.Text = dgvInternationalLicenses.RowCount.ToString();
 
             if (cbFilterBy.Text == "Is Active")
@@ -132,12 +124,12 @@ namespace DVLD.Licenses.International_Licenses
             //Reset the filters in case nothing selected or filter value conains nothing.
             if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
             {
-                _GetAllInternationalLicenses.DefaultView.RowFilter = "";
+                _InternationalLicenses.DefaultView.RowFilter = "";
                 lblRecordsCount.Text = dgvInternationalLicenses.Rows.Count.ToString();
                 return;
             }
 
-            _GetAllInternationalLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
+            _InternationalLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
 
             lblRecordsCount.Text = dgvInternationalLicenses.Rows.Count.ToString();
 
@@ -166,9 +158,9 @@ namespace DVLD.Licenses.International_Licenses
                     break;
             }
             if (FilterValue == "All")
-                _GetAllInternationalLicenses.DefaultView.RowFilter = "";
+                _InternationalLicenses.DefaultView.RowFilter = "";
             else
-                _GetAllInternationalLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
+                _InternationalLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
 
             lblRecordsCount.Text = dgvInternationalLicenses.Rows.Count.ToString();
 
@@ -177,8 +169,8 @@ namespace DVLD.Licenses.International_Licenses
         private void frmInternationalLicensesApplications_Load(object sender, EventArgs e)
         {
 
-            _GetAllInternationalLicenses = clsInternationalLicense.GetAllInternationalLicenses();
-            dgvInternationalLicenses.DataSource = _GetAllInternationalLicenses;
+            _InternationalLicenses = clsInternationalLicense.GetAllInternationalLicenses();
+            dgvInternationalLicenses.DataSource = _InternationalLicenses;
             cbFilterBy.SelectedIndex = 0;
 
             lblRecordsCount.Text = dgvInternationalLicenses.RowCount.ToString();

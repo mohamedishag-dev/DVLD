@@ -32,12 +32,12 @@ namespace DVLD.Licenses.International_Licenses.Controls
         private void _LoadPresonImage()
         {
 
-            if (_InternationalLicense.ApplicationInfo.PersonInfo.Gendor == 0)
+            if (_InternationalLicense.DriverInfo.PersonInfo.Gendor == 0)
                 imgPerson.Image = Properties.Resources.Male_512;
             else
                 imgPerson.Image = Properties.Resources.Female_512;
 
-            string ImagePath = _InternationalLicense.ApplicationInfo.PersonInfo.ImagePath;
+            string ImagePath = _InternationalLicense.DriverInfo.PersonInfo.ImagePath;
             if (ImagePath != "")
                 if (File.Exists(ImagePath))
                     imgPerson.Load(ImagePath);
@@ -48,16 +48,16 @@ namespace DVLD.Licenses.International_Licenses.Controls
 
         private void _FillLicenseInfo()
         {
-            lblName.Text = _InternationalLicense.ApplicationInfo.PersonInfo.FullName;
+            lblName.Text = _InternationalLicense.DriverInfo.PersonInfo.FullName;
             lblInternationalLicenseID.Text = _InternationalLicense.InternationalLicenseID.ToString();
             lblLicenseID.Text = _InternationalLicense.IssuedUsingLocalLicenseID.ToString();
-            lblNationailNO.Text = _InternationalLicense.ApplicationInfo.PersonInfo.NationalNo;
-            lblGedor.Text = _InternationalLicense.ApplicationInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
+            lblNationailNO.Text = _InternationalLicense.DriverInfo.PersonInfo.NationalNo;
+            lblGedor.Text = _InternationalLicense.DriverInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
             lblIssueDate.Text = _InternationalLicense.IssueDate.ToShortDateString();
 
             lblApplicationID.Text = _InternationalLicense.ApplicationID.ToString();
             lblIsActive.Text = _InternationalLicense.IsActive ? "Yes" : "No";
-            lblDateOfBrith.Text = _InternationalLicense.ApplicationInfo.PersonInfo.DateOfBirth.ToShortDateString();
+            lblDateOfBrith.Text = _InternationalLicense.DriverInfo.PersonInfo.DateOfBirth.ToShortDateString();
             lblDriverID.Text = _InternationalLicense.DriverID.ToString();
             lblExpirationDate.Text = _InternationalLicense.ExpirationDate.ToShortDateString();
 
@@ -65,10 +65,10 @@ namespace DVLD.Licenses.International_Licenses.Controls
 
         }
 
-        public void LoadInternationalLicenseInfo(int InternationalLicenseID)
+        public void LoadInfo(int InternationalLicenseID)
         {
             _InternationalLicenseID = InternationalLicenseID;
-            _InternationalLicense = clsInternationalLicense.FindByID(InternationalLicenseID);
+            _InternationalLicense = clsInternationalLicense.Find(_InternationalLicenseID);
             if (_InternationalLicense == null)
             {
                 _InternationalLicenseID = -1;

@@ -16,7 +16,7 @@ namespace DVLD.Applications.Rlease_Detained_License.Controls
         public void LoadDetainCard(int DetainID)
         {
 
-            _DetainedLicense = clsDetainedLicense.FindByID(DetainID);
+            _DetainedLicense = clsDetainedLicense.Find(DetainID);
             if (_DetainedLicense == null)
             {
                 _DetainedLicenseID = -1;

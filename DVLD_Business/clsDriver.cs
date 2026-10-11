@@ -76,7 +76,7 @@ namespace DVLD_Business
 
         }
 
-        public static DataTable GetAllDrivers()
+        public static DataTable GetDrivers()
         {
             return clsDriverData.GetAllDrivers();
         }

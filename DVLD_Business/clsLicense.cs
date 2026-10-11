@@ -220,28 +220,30 @@ namespace DVLD_Business
 
         }
 
-        public bool ReleaseDetainedLicense(int ReleasedByUserID)
+        public bool ReleaseDetainedLicense(int ReleasedByUserID, ref int ApplicationID)
         {
-            //First Create Application
+
+            //First Create Applicaiton 
             clsApplication Application = new clsApplication();
+
             Application.ApplicantPersonID = this.DriverInfo.PersonID;
             Application.ApplicationDate = DateTime.Now;
             Application.ApplicationTypeID = (int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense;
             Application.ApplicationStatus = clsApplication.enApplicationStatus.Completed;
             Application.LastStatusDate = DateTime.Now;
-            Application.PaidFees = clsApplicationType.Find(Application.ApplicationTypeID).Fees;
+            Application.PaidFees = clsApplicationType.Find((int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense).Fees;
             Application.CreatedByUserID = ReleasedByUserID;
 
             if (!Application.Save())
             {
                 ApplicationID = -1;
                 return false;
-
             }
 
             ApplicationID = Application.ApplicationID;
 
-            return this.DetainedInfo.ReleaseDetainedLicense(ReleasedByUserID, ApplicationID);
+
+            return this.DetainedInfo.ReleaseDetainedLicense(ReleasedByUserID, Application.ApplicationID);
 
         }
 

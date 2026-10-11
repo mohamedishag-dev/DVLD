@@ -31,8 +31,9 @@ namespace DVLD_Business
             this.ReleaseApplicationID = -1;
             this.Mode = enMode.AddNew;
         }
-        private clsDetainedLicense(int DetainID, int LicenseID, DateTime DetainDate, float FineFees, int CreatedByUserID,
-               bool IsReleased, DateTime ReleaseDate, int ReleasedByUserID, int ReleaseApplicationID)
+        private clsDetainedLicense(int DetainID, int LicenseID, DateTime DetainDate,
+            float FineFees, int CreatedByUserID,bool IsReleased, DateTime ReleaseDate, 
+            int ReleasedByUserID, int ReleaseApplicationID)
         {
             this.DetainID = DetainID;
             this.LicenseID = LicenseID;
@@ -92,7 +93,7 @@ namespace DVLD_Business
 
             return clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, this.ReleasedByUserID, this.ReleaseApplicationID);
         }
-
+      
         public static DataTable GetAllDetainedLicenses()
         {
             return clsDetainedLicenseData.GetAllDetainedLicenses();
@@ -104,13 +105,7 @@ namespace DVLD_Business
 
         }
 
-        public static bool IsDetainedLicenseExist(int DetainID)
-        {
-            return clsDetainedLicenseData.IsDetainedLicenseExist(DetainID);
-
-        }
-
-        public static clsDetainedLicense FindByID(int DetainID)
+        public static clsDetainedLicense Find(int DetainID)
         {
             float FineFees = 0;
             bool IsReleased = false;
@@ -144,9 +139,9 @@ namespace DVLD_Business
                 return null;
         }
 
-        public bool ReleaseDetainedLicense(int ReleasedByUserID, int ApplicationID)
+        public bool ReleaseDetainedLicense(int ReleasedByUserID, int ReleasedApplicationID)
         {
-            return clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, ReleasedByUserID, ApplicationID);
+            return clsDetainedLicenseData.ReleaseDetainedLicense(this.DetainID, ReleasedByUserID, ReleasedApplicationID);
 
         }
 

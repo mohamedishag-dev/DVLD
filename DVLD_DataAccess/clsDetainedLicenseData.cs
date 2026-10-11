@@ -242,37 +242,42 @@ namespace DVLD_DataAccess
             return DetainID;
         }
 
-        public static bool IsDetainedLicenseExist(int DetainID)
+        public static bool ReleaseDetainedLicense(int DetainID, int ReleasedByUserID, int ReleaseApplicationID)
         {
-            bool isFound = false;
 
+            int rowsAffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT Found=1 FROM DetainedLicenses WHERE DetainID = @DetainID";
+            string query = @"UPDATE DetainedLicenses
+                                SET IsReleased = 1
+                                   ,ReleaseDate = @ReleaseDate
+                                   ,ReleasedByUserID = @ReleasedByUserID   
+                                   ,ReleaseApplicationID = @ReleaseApplicationID   
+                              WHERE DetainID = @DetainID;";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@DetainID", DetainID);
-
+            command.Parameters.AddWithValue("@ReleasedByUserID", ReleasedByUserID);
+            command.Parameters.AddWithValue("@ReleaseApplicationID", ReleaseApplicationID);
+            command.Parameters.AddWithValue("@ReleaseDate", DateTime.Now);
             try
             {
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                rowsAffected = command.ExecuteNonQuery();
 
-                isFound = reader.HasRows;
-
-                reader.Close();
             }
             catch (Exception ex)
             {
-                isFound = false;
+                return false;
             }
+
             finally
             {
                 connection.Close();
             }
 
-            return isFound;
+            return (rowsAffected > 0);
         }
 
         public static bool IsLicenseDetained(int LicenseID)
@@ -314,15 +319,7 @@ namespace DVLD_DataAccess
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT DetainedLicenses.DetainID, DetainedLicenses.LicenseID, DetainedLicenses.DetainDate, DetainedLicenses.IsReleased, 
-                                    DetainedLicenses.FineFees, DetainedLicenses.ReleaseDate, People.NationalNo,
-                                    People.FirstName +' '+People.SecondName +' '+ ISNULL(People.ThirdName, '')  +' '+People.LastName AS FullName, 
-                                    DetainedLicenses.ReleaseApplicationID
-                               FROM DetainedLicenses INNER JOIN
-                                    Licenses ON DetainedLicenses.LicenseID = Licenses.LicenseID 
-                              INNER JOIN Drivers ON Licenses.DriverID = Drivers.DriverID 
-                              INNER JOIN People ON Drivers.PersonID = People.PersonID
-                              ORDER BY DetainedLicenses.DetainDate DESC, DetainedLicenses.ReleaseDate DESC";
+            string query = @"SELECT * FROM DetainedLicenses_View ORDER BY IsReleased";
 
             SqlCommand command = new SqlCommand(query, connection);
 

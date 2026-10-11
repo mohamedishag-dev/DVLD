@@ -10,7 +10,7 @@ namespace DVLD
 {
     public partial class frmListDrivers : Form
     {
-        private static DataTable _dtAllDrivers;
+        private static DataTable _dtDrivers;
         public frmListDrivers()
         {
             InitializeComponent();
@@ -18,8 +18,8 @@ namespace DVLD
 
         private void frmDrivers_Load(object sender, EventArgs e)
         {
-            _dtAllDrivers = clsDriver.GetAllDrivers();
-            dgvDrivers.DataSource = _dtAllDrivers;
+            _dtDrivers = clsDriver.GetDrivers();
+            dgvDrivers.DataSource = _dtDrivers;
             cbFilterBy.SelectedIndex = 0;
 
             txtFilterValue.Visible = (cbFilterBy.Text != "None");
@@ -87,7 +87,7 @@ namespace DVLD
             //Reset the filters in case nothing selected or filter value conains nothing.
             if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
             {
-                _dtAllDrivers.DefaultView.RowFilter = "";
+                _dtDrivers.DefaultView.RowFilter = "";
                 lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
                 return;
             }
@@ -95,66 +95,23 @@ namespace DVLD
             if (FilterColumn == "DriverID" || FilterColumn == "PersonID")
                 //in this case we deal with integer not string.
 
-                _dtAllDrivers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
+                _dtDrivers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
             else
-                _dtAllDrivers.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
+                _dtDrivers.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
 
             lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
 
-        }
-
-        private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string FilterColumn = "IsActive";
-            string FilterValue = cbIsActive.Text;
-
-            switch (FilterValue)
-            {
-                case "All":
-                    break;
-
-                case "Yes":
-                    FilterValue = "1";
-                    break;
-
-                case "No":
-                    FilterValue = "0";
-                    break;
-
-                default:
-                    break;
-            }
-            if (FilterValue == "All")
-                _dtAllDrivers.DefaultView.RowFilter = "";
-            else
-                _dtAllDrivers.DefaultView.RowFilter = string.Format("[{0}] <= {1}", FilterColumn, FilterValue);
-
-            lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
         }
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (cbFilterBy.Text == "Active Licenses")
-            {
-                cbIsActive.Visible = true;
-                cbIsActive.Focus();
-                cbIsActive.SelectedIndex = 0;
-                txtFilterValue.Visible = false;
-                return;
-            }
-            else
-            {
+            txtFilterValue.Visible = (cbFilterBy.Text != "None");
+            txtFilterValue.Text = "";
+            txtFilterValue.Focus();
+            _dtDrivers.DefaultView.RowFilter = "";
+            lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
 
-                cbIsActive.Visible = false;
-                txtFilterValue.Visible = (cbFilterBy.Text != "None");
-                txtFilterValue.Text = "";
-                txtFilterValue.Focus();
-
-                _dtAllDrivers.DefaultView.RowFilter = "";
-                lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
-
-            }
         }
 
         private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
@@ -185,6 +142,7 @@ namespace DVLD
         {
             frmLicenseHistory frm = new frmLicenseHistory((int)dgvDrivers.CurrentRow.Cells[1].Value);
             frm.ShowDialog();
+
         }
 
         private void dgvDrivers_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -195,8 +153,8 @@ namespace DVLD
 
         private void cmsDrivers_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            int DriverID= (int)dgvDrivers.CurrentRow.Cells[0].Value;
-            issueInternationalLicenseToolStripMenuItem.Enabled = !clsInternationalLicense.DoesActiveInternationalLicenseForDriverID(DriverID);
+            int InternationalLicenseID = clsInternationalLicense.GetActiveInternationalLicenseIDByDriverID((int)dgvDrivers.CurrentRow.Cells[0].Value);
+            issueInternationalLicenseToolStripMenuItem.Enabled = (InternationalLicenseID == -1);
 
         }
     }

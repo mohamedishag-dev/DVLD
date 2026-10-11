@@ -30,7 +30,7 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnIssue = new System.Windows.Forms.Button();
+            this.btnIssueLicense = new System.Windows.Forms.Button();
             this.llShowLicensesHistory = new System.Windows.Forms.LinkLabel();
             this.llShowLicenseInfo = new System.Windows.Forms.LinkLabel();
             this.gbApplicationInfo = new System.Windows.Forms.GroupBox();
@@ -86,7 +86,7 @@
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD.Properties.Resources.Close_32;
-            this.btnClose.Location = new System.Drawing.Point(566, 604);
+            this.btnClose.Location = new System.Drawing.Point(566, 559);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(117, 43);
             this.btnClose.TabIndex = 163;
@@ -95,24 +95,24 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnIssue
+            // btnIssueLicense
             // 
-            this.btnIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnIssue.Image = global::DVLD.Properties.Resources.International_32;
-            this.btnIssue.Location = new System.Drawing.Point(689, 604);
-            this.btnIssue.Name = "btnIssue";
-            this.btnIssue.Size = new System.Drawing.Size(117, 43);
-            this.btnIssue.TabIndex = 162;
-            this.btnIssue.Text = "Issue";
-            this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnIssue.UseVisualStyleBackColor = true;
-            this.btnIssue.Click += new System.EventHandler(this.btnIssue_Click);
+            this.btnIssueLicense.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnIssueLicense.Image = global::DVLD.Properties.Resources.International_32;
+            this.btnIssueLicense.Location = new System.Drawing.Point(689, 559);
+            this.btnIssueLicense.Name = "btnIssueLicense";
+            this.btnIssueLicense.Size = new System.Drawing.Size(117, 43);
+            this.btnIssueLicense.TabIndex = 162;
+            this.btnIssueLicense.Text = "Issue";
+            this.btnIssueLicense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnIssueLicense.UseVisualStyleBackColor = true;
+            this.btnIssueLicense.Click += new System.EventHandler(this.btnIssue_Click);
             // 
             // llShowLicensesHistory
             // 
             this.llShowLicensesHistory.AutoSize = true;
             this.llShowLicensesHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.llShowLicensesHistory.Location = new System.Drawing.Point(15, 616);
+            this.llShowLicensesHistory.Location = new System.Drawing.Point(15, 571);
             this.llShowLicensesHistory.Name = "llShowLicensesHistory";
             this.llShowLicensesHistory.Size = new System.Drawing.Size(181, 18);
             this.llShowLicensesHistory.TabIndex = 164;
@@ -124,7 +124,7 @@
             // 
             this.llShowLicenseInfo.AutoSize = true;
             this.llShowLicenseInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.llShowLicenseInfo.Location = new System.Drawing.Point(233, 616);
+            this.llShowLicenseInfo.Location = new System.Drawing.Point(233, 571);
             this.llShowLicenseInfo.Name = "llShowLicenseInfo";
             this.llShowLicenseInfo.Size = new System.Drawing.Size(146, 18);
             this.llShowLicenseInfo.TabIndex = 165;
@@ -158,7 +158,7 @@
             this.gbApplicationInfo.Controls.Add(this.labelIssueDate);
             this.gbApplicationInfo.Controls.Add(this.lblExpirationDate);
             this.gbApplicationInfo.Controls.Add(this.lblIssueDate);
-            this.gbApplicationInfo.Location = new System.Drawing.Point(18, 443);
+            this.gbApplicationInfo.Location = new System.Drawing.Point(18, 393);
             this.gbApplicationInfo.Name = "gbApplicationInfo";
             this.gbApplicationInfo.Size = new System.Drawing.Size(785, 155);
             this.gbApplicationInfo.TabIndex = 166;
@@ -418,7 +418,7 @@
             this.ctrlDriverLicenseInfoWithFilter1.FilterEnabled = true;
             this.ctrlDriverLicenseInfoWithFilter1.Location = new System.Drawing.Point(15, 43);
             this.ctrlDriverLicenseInfoWithFilter1.Name = "ctrlDriverLicenseInfoWithFilter1";
-            this.ctrlDriverLicenseInfoWithFilter1.Size = new System.Drawing.Size(788, 394);
+            this.ctrlDriverLicenseInfoWithFilter1.Size = new System.Drawing.Size(788, 344);
             this.ctrlDriverLicenseInfoWithFilter1.TabIndex = 161;
             this.ctrlDriverLicenseInfoWithFilter1.OnLicenseSelected += new System.Action<int>(this.ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected);
             // 
@@ -426,12 +426,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 652);
+            this.ClientSize = new System.Drawing.Size(812, 608);
             this.Controls.Add(this.gbApplicationInfo);
             this.Controls.Add(this.llShowLicenseInfo);
             this.Controls.Add(this.llShowLicensesHistory);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnIssue);
+            this.Controls.Add(this.btnIssueLicense);
             this.Controls.Add(this.ctrlDriverLicenseInfoWithFilter1);
             this.Controls.Add(this.lblTitle);
             this.MaximizeBox = false;
@@ -461,7 +461,7 @@
         private System.Windows.Forms.Label lblTitle;
         private Local_License.ctrlDriverLicenseInfoWithFilter ctrlDriverLicenseInfoWithFilter1;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnIssue;
+        private System.Windows.Forms.Button btnIssueLicense;
         private System.Windows.Forms.LinkLabel llShowLicensesHistory;
         private System.Windows.Forms.LinkLabel llShowLicenseInfo;
         private System.Windows.Forms.GroupBox gbApplicationInfo;

@@ -12,7 +12,7 @@ namespace DVLD.Applications.Rlease_Detained_License
 {
     public partial class frmListDetainedLicenses : Form
     {
-        private DataTable _dtAllDetainedLicenses;
+        private DataTable _dtDetainedLicenses;
         public frmListDetainedLicenses()
         {
             InitializeComponent();
@@ -25,8 +25,8 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void frmListDetainedLicenses_Load(object sender, EventArgs e)
         {
-            _dtAllDetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
-            dgvDetainedLicenses.DataSource = _dtAllDetainedLicenses;
+            _dtDetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
+            dgvDetainedLicenses.DataSource = _dtDetainedLicenses;
             cbFilterBy.SelectedIndex = 0;
 
             txtFilterValue.Visible = (cbFilterBy.Text != "None");
@@ -85,7 +85,7 @@ namespace DVLD.Applications.Rlease_Detained_License
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
      
-            _dtAllDetainedLicenses.DefaultView.RowFilter = "";
+            _dtDetainedLicenses.DefaultView.RowFilter = "";
             lblRecordsCount.Text = dgvDetainedLicenses.RowCount.ToString();
 
             if (cbFilterBy.Text == "Is Released")
@@ -128,9 +128,9 @@ namespace DVLD.Applications.Rlease_Detained_License
             }
 
             if (FilterValue == "All")
-                _dtAllDetainedLicenses.DefaultView.RowFilter = "";
+                _dtDetainedLicenses.DefaultView.RowFilter = "";
             else
-                _dtAllDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
+                _dtDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
 
             lblRecordsCount.Text = dgvDetainedLicenses.Rows.Count.ToString();
 
@@ -172,7 +172,7 @@ namespace DVLD.Applications.Rlease_Detained_License
             //Reset the filters in case nothing selected or filter value conains nothing.
             if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
             {
-                _dtAllDetainedLicenses.DefaultView.RowFilter = "";
+                _dtDetainedLicenses.DefaultView.RowFilter = "";
                 lblRecordsCount.Text = dgvDetainedLicenses.Rows.Count.ToString();
                 return;
             }
@@ -180,9 +180,9 @@ namespace DVLD.Applications.Rlease_Detained_License
             if (FilterColumn != "NationalNo" && FilterColumn != "FullName")
                 //in this case we deal with integer not string.
 
-                _dtAllDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
+                _dtDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
             else
-                _dtAllDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
+                _dtDetainedLicenses.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
 
             lblRecordsCount.Text = dgvDetainedLicenses.Rows.Count.ToString();
 
@@ -225,8 +225,7 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void cmsDetainedLicenses_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
-            releaseDetainedLicenseToolStripMenuItem.Enabled = clsDetainedLicense.IsLicenseDetained(LicenseID);
+            releaseDetainedLicenseToolStripMenuItem.Enabled = !(bool)dgvDetainedLicenses.CurrentRow.Cells[3].Value;
 
         }
     }

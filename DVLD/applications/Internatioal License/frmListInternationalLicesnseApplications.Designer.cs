@@ -1,6 +1,6 @@
 ﻿namespace DVLD.Licenses.International_Licenses
 {
-    partial class frmInternationalLicensesApplications
+    partial class frmListInternationalLicesnseApplications
     {
         /// <summary>
         /// Required designer variable.
@@ -235,7 +235,7 @@
             this.btnAddLocalDrivingLicenseApplication.UseVisualStyleBackColor = true;
             this.btnAddLocalDrivingLicenseApplication.Click += new System.EventHandler(this.btnAddLocalDrivingLicenseApplication_Click);
             // 
-            // frmInternationalLicensesApplications
+            // frmListInternationalLicesnseApplications
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -254,7 +254,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmInternationalLicensesApplications";
+            this.Name = "frmListInternationalLicesnseApplications";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List International Licenses Applications";

@@ -101,7 +101,7 @@ namespace DVLD
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            frmInternationalLicensesApplications frm = new frmInternationalLicensesApplications();
+            frmListInternationalLicesnseApplications frm = new frmListInternationalLicesnseApplications();
             frm.ShowDialog();
 
         }

@@ -88,10 +88,10 @@
             this.llShowReleasedLicenseInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.llShowReleasedLicenseInfo.Location = new System.Drawing.Point(235, 590);
             this.llShowReleasedLicenseInfo.Name = "llShowReleasedLicenseInfo";
-            this.llShowReleasedLicenseInfo.Size = new System.Drawing.Size(193, 18);
+            this.llShowReleasedLicenseInfo.Size = new System.Drawing.Size(155, 18);
             this.llShowReleasedLicenseInfo.TabIndex = 241;
             this.llShowReleasedLicenseInfo.TabStop = true;
-            this.llShowReleasedLicenseInfo.Text = "Show New Licenses Info";
+            this.llShowReleasedLicenseInfo.Text = "Show Licenses Info";
             this.llShowReleasedLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowNewLicenseInfo_LinkClicked);
             // 
             // llShowLicensesHistory

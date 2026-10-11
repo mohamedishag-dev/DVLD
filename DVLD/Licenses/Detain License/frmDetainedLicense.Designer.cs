@@ -45,7 +45,7 @@
             this.labelDetainDate = new System.Windows.Forms.Label();
             this.gbApplicationInfo = new System.Windows.Forms.GroupBox();
             this.txtFineFees = new System.Windows.Forms.TextBox();
-            this.llShowNewLicenseInfo = new System.Windows.Forms.LinkLabel();
+            this.llShowLicenseInfo = new System.Windows.Forms.LinkLabel();
             this.llShowLicensesHistory = new System.Windows.Forms.LinkLabel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDetain = new System.Windows.Forms.Button();
@@ -241,17 +241,17 @@
             this.txtFineFees.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFineFees_KeyPress);
             this.txtFineFees.Validating += new System.ComponentModel.CancelEventHandler(this.txtFineFees_Validating);
             // 
-            // llShowNewLicenseInfo
+            // llShowLicenseInfo
             // 
-            this.llShowNewLicenseInfo.AutoSize = true;
-            this.llShowNewLicenseInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.llShowNewLicenseInfo.Location = new System.Drawing.Point(220, 535);
-            this.llShowNewLicenseInfo.Name = "llShowNewLicenseInfo";
-            this.llShowNewLicenseInfo.Size = new System.Drawing.Size(193, 18);
-            this.llShowNewLicenseInfo.TabIndex = 3;
-            this.llShowNewLicenseInfo.TabStop = true;
-            this.llShowNewLicenseInfo.Text = "Show New Licenses Info";
-            this.llShowNewLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowNewLicenseInfo_LinkClicked);
+            this.llShowLicenseInfo.AutoSize = true;
+            this.llShowLicenseInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.llShowLicenseInfo.Location = new System.Drawing.Point(220, 535);
+            this.llShowLicenseInfo.Name = "llShowLicenseInfo";
+            this.llShowLicenseInfo.Size = new System.Drawing.Size(155, 18);
+            this.llShowLicenseInfo.TabIndex = 3;
+            this.llShowLicenseInfo.TabStop = true;
+            this.llShowLicenseInfo.Text = "Show Licenses Info";
+            this.llShowLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowNewLicenseInfo_LinkClicked);
             // 
             // llShowLicensesHistory
             // 
@@ -300,7 +300,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(815, 47);
             this.lblTitle.TabIndex = 237;
-            this.lblTitle.Text = "Renew License Application";
+            this.lblTitle.Text = "Detain License";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ctrlDriverLicenseInfoWithFilter1
@@ -323,7 +323,7 @@
             this.ClientSize = new System.Drawing.Size(815, 572);
             this.Controls.Add(this.ctrlDriverLicenseInfoWithFilter1);
             this.Controls.Add(this.gbApplicationInfo);
-            this.Controls.Add(this.llShowNewLicenseInfo);
+            this.Controls.Add(this.llShowLicenseInfo);
             this.Controls.Add(this.llShowLicensesHistory);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnDetain);
@@ -365,7 +365,7 @@
         private System.Windows.Forms.Label labelDetainDate;
         private Licenses.Local_License.ctrlDriverLicenseInfoWithFilter ctrlDriverLicenseInfoWithFilter1;
         private System.Windows.Forms.GroupBox gbApplicationInfo;
-        private System.Windows.Forms.LinkLabel llShowNewLicenseInfo;
+        private System.Windows.Forms.LinkLabel llShowLicenseInfo;
         private System.Windows.Forms.LinkLabel llShowLicensesHistory;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnDetain;

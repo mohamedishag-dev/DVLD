@@ -7,38 +7,53 @@ namespace DVLD.Applications.Internatioal_License.Controls
 {
     public partial class ctrlDriverLicenses : UserControl
     {
-        private DataTable _GetAllLicenses;
-        private DataTable _GetAllInternationalLicenses;
+        private int _DriverID=-1;
+        private clsDriver _Driver;
+        private DataTable _GetLocalLicenses;
+        private DataTable _GetInternationalLicenses;
 
         public ctrlDriverLicenses()
         {
             InitializeComponent();
         }
 
-        public void LoadLicensesByDriverID(int DriverID)
+        public void LoadInfo(int DriverID)
         {
-            _GetAllLicenses = clsLicense.GetDriverLicenses(DriverID);
-            _GetAllInternationalLicenses = clsInternationalLicense.GetAllInternationalLicenses(DriverID);
+            _Driver = clsDriver.FindByDriverID(DriverID);
 
-            LoadLicenses();
+            if (_Driver == null)
+            {
+                MessageBox.Show("There is no driver linked with id = " + DriverID.ToString(),
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _DriverID = _Driver.DriverID;
+            LoadLocalLicenses();
             InternationalLicenses();
 
         }
 
-        public void LoadLicensesByPersonID(int PersonID)
+        public void LoadInfoByPersonID(int PersonID)
         {
-            int DriverID = clsDriver.FindByPersonID(PersonID).DriverID;
-            _GetAllLicenses = clsLicense.GetDriverLicenses(DriverID);
-            _GetAllInternationalLicenses = clsInternationalLicense.GetAllInternationalLicenses(DriverID);
+            _Driver = clsDriver.FindByPersonID(PersonID);
 
-            LoadLicenses();
+            if (_Driver == null)
+            {
+                MessageBox.Show("There is no driver linked with person with id = " + PersonID.ToString(),
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _DriverID = _Driver.DriverID;
+            LoadLocalLicenses();
             InternationalLicenses();
 
         }
 
-        private void LoadLicenses()
+        private void LoadLocalLicenses()
         {
-            dgvLocalLicenses.DataSource = _GetAllLicenses;
+            _GetLocalLicenses = clsLicense.GetDriverLicenses(_DriverID);
+
+            dgvLocalLicenses.DataSource = _GetLocalLicenses;
             lblRecordsCountLocal.Text = dgvLocalLicenses.Rows.Count.ToString();
 
             if (dgvLocalLicenses.Rows.Count > 0)
@@ -65,8 +80,9 @@ namespace DVLD.Applications.Internatioal_License.Controls
 
         private void InternationalLicenses()
         {
-            dgvInternationalLicenses.DataSource = _GetAllInternationalLicenses;
-            lblRecordsCountInternatioal.Text = _GetAllInternationalLicenses.Rows.Count.ToString();
+            _GetInternationalLicenses = clsInternationalLicense.GetAllInternationalLicenses(_DriverID);
+            dgvInternationalLicenses.DataSource = _GetInternationalLicenses;
+            lblRecordsCountInternatioal.Text = _GetInternationalLicenses.Rows.Count.ToString();
 
             if (dgvInternationalLicenses.Rows.Count > 0)
             {

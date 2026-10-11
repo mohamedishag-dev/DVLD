@@ -44,7 +44,6 @@
             this.showPersonLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imgPeople = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.cbIsActive = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDrivers)).BeginInit();
             this.cmsDrivers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPeople)).BeginInit();
@@ -93,8 +92,7 @@
             "Driver ID",
             "Person ID",
             "National No.",
-            "Full Name",
-            "Active Licenses"});
+            "Full Name"});
             this.cbFilterBy.Location = new System.Drawing.Point(117, 207);
             this.cbFilterBy.Name = "cbFilterBy";
             this.cbFilterBy.Size = new System.Drawing.Size(167, 28);
@@ -145,7 +143,7 @@
             this.toolStripSeparator1,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.cmsDrivers.Name = "contextMenuStrip1";
-            this.cmsDrivers.Size = new System.Drawing.Size(242, 152);
+            this.cmsDrivers.Size = new System.Drawing.Size(242, 130);
             this.cmsDrivers.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDrivers_Opening);
             // 
             // showDetailsToolStripMenuItem
@@ -208,29 +206,11 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // cbIsActive
-            // 
-            this.cbIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbIsActive.FormattingEnabled = true;
-            this.cbIsActive.Items.AddRange(new object[] {
-            "All",
-            "Yes",
-            "No"});
-            this.cbIsActive.Location = new System.Drawing.Point(290, 207);
-            this.cbIsActive.Name = "cbIsActive";
-            this.cbIsActive.Size = new System.Drawing.Size(121, 24);
-            this.cbIsActive.TabIndex = 33;
-            this.cbIsActive.Visible = false;
-            this.cbIsActive.SelectedIndexChanged += new System.EventHandler(this.cbIsActive_SelectedIndexChanged);
-            // 
             // frmListDrivers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 541);
-            this.Controls.Add(this.cbIsActive);
             this.Controls.Add(this.imgPeople);
             this.Controls.Add(this.lblTital);
             this.Controls.Add(this.txtFilterValue);
@@ -266,7 +246,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridView dgvDrivers;
-        private System.Windows.Forms.ComboBox cbIsActive;
         private System.Windows.Forms.ContextMenuStrip cmsDrivers;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

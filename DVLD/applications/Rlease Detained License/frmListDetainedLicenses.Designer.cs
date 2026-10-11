@@ -150,6 +150,7 @@
             this.releaseDetainedLicenseToolStripMenuItem});
             this.cmsDetainedLicenses.Name = "contextMenuStrip1";
             this.cmsDetainedLicenses.Size = new System.Drawing.Size(242, 190);
+            this.cmsDetainedLicenses.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDetainedLicenses_Opening);
             // 
             // showDetailsToolStripMenuItem
             // 

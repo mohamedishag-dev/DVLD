@@ -74,6 +74,75 @@ namespace DVLD_DataAccess
             return isFound;
         }
 
+        public static bool GetLicenseInfoByDriverID(int DriverID, ref int LicenseID, ref int ApplicationID, ref int LicenseClass,
+       ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes, ref float PaidFees,
+       ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID)
+        {
+
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT * FROM Licenses WHERE DriverID = @DriverID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@DriverID", DriverID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // The record was found
+                    isFound = true;
+
+                    ApplicationID = (int)reader["ApplicationID"];
+                    LicenseID = (int)reader["LicenseID"];
+                    LicenseClass = (int)reader["LicenseClass"];
+                    IssueDate = (DateTime)reader["IssueDate"];
+                    ExpirationDate = (DateTime)reader["ExpirationDate"];
+
+                    //Notes: allows null in database so we should handle nll
+                    if (reader["Notes"] != DBNull.Value)
+                        Notes = (string)reader["Notes"];
+                    else
+                        Notes = "";
+
+                    PaidFees = Convert.ToSingle(reader["PaidFees"]);
+                    IsActive = (bool)reader["IsActive"];
+                    IssueReason = (byte)reader["IssueReason"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+
+                }
+                else
+                {
+                    // The record was not found
+                    isFound = false;
+                }
+
+                reader.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                isFound = false;
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
+
         public static int AddNewLicense(int ApplicationID, int DriverID, int LicenseClass, DateTime IssueDate,
             DateTime ExpirationDate, string Notes, float PaidFees, bool IsActive,
                   byte IssueReason, int CreatedByUserID)

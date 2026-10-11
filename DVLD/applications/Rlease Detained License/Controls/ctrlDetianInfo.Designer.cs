@@ -50,6 +50,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCreatedBy = new System.Windows.Forms.Label();
             this.lebleCreatedBy = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.lblApplicationID = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.gbDetainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -58,10 +61,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // gbDetainInfo
             // 
+            this.gbDetainInfo.Controls.Add(this.pictureBox7);
+            this.gbDetainInfo.Controls.Add(this.lblApplicationID);
+            this.gbDetainInfo.Controls.Add(this.label8);
             this.gbDetainInfo.Controls.Add(this.lblDetnainID);
             this.gbDetainInfo.Controls.Add(this.pictureBox6);
             this.gbDetainInfo.Controls.Add(this.labelDetnainID);
@@ -176,10 +183,10 @@
             // lblLicenseID
             // 
             this.lblLicenseID.AutoSize = true;
-            this.lblLicenseID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.lblLicenseID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblLicenseID.Location = new System.Drawing.Point(534, 25);
             this.lblLicenseID.Name = "lblLicenseID";
-            this.lblLicenseID.Size = new System.Drawing.Size(45, 18);
+            this.lblLicenseID.Size = new System.Drawing.Size(41, 16);
             this.lblLicenseID.TabIndex = 268;
             this.lblLicenseID.Text = "[???]";
             // 
@@ -290,10 +297,10 @@
             // lblCreatedBy
             // 
             this.lblCreatedBy.AutoSize = true;
-            this.lblCreatedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.lblCreatedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCreatedBy.Location = new System.Drawing.Point(534, 53);
             this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(45, 18);
+            this.lblCreatedBy.Size = new System.Drawing.Size(41, 16);
             this.lblCreatedBy.TabIndex = 243;
             this.lblCreatedBy.Text = "[???]";
             // 
@@ -306,6 +313,38 @@
             this.lebleCreatedBy.Size = new System.Drawing.Size(88, 16);
             this.lebleCreatedBy.TabIndex = 242;
             this.lebleCreatedBy.Text = "Created By:";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::DVLD.Properties.Resources.Number_32;
+            this.pictureBox7.Location = new System.Drawing.Point(497, 112);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(32, 18);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 279;
+            this.pictureBox7.TabStop = false;
+            // 
+            // lblApplicationID
+            // 
+            this.lblApplicationID.AutoSize = true;
+            this.lblApplicationID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblApplicationID.Location = new System.Drawing.Point(535, 112);
+            this.lblApplicationID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblApplicationID.Name = "lblApplicationID";
+            this.lblApplicationID.Size = new System.Drawing.Size(41, 16);
+            this.lblApplicationID.TabIndex = 278;
+            this.lblApplicationID.Text = "[???]";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(359, 112);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(108, 16);
+            this.label8.TabIndex = 277;
+            this.label8.Text = "Application ID:";
             // 
             // ctrlDetianInfo
             // 
@@ -323,6 +362,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -351,5 +391,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblCreatedBy;
         private System.Windows.Forms.Label lebleCreatedBy;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label lblApplicationID;
+        private System.Windows.Forms.Label label8;
     }
 }

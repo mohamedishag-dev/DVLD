@@ -74,7 +74,7 @@ namespace DVLD_Business
             this.Mode = enMode.Update;
         }
 
-        public static clsLicense Find(int LicenseID)
+        public static clsLicense FindByID(int LicenseID)
         {
             string Notes = "";
             float PaidFees = 0;
@@ -84,6 +84,24 @@ namespace DVLD_Business
             int DriverID = -1, ApplicationID = -1, LicenseClass = -1, CreatedByUserID = -1;
 
             if (clsLicenseData.GetLicenseInfoByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass, ref IssueDate,
+            ref ExpirationDate, ref Notes, ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
+
+                return new clsLicense(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate,
+                      Notes, PaidFees, IsActive, (enIssueReason)IssueReason, CreatedByUserID);
+            else
+                return null;
+        }
+
+        public static clsLicense FindByDriverID(int DriverID)
+        {
+            string Notes = "";
+            float PaidFees = 0;
+            byte IssueReason = 0;
+            bool IsActive = false;
+            DateTime IssueDate = DateTime.Now, ExpirationDate = DateTime.Now;
+            int LicenseID = -1, ApplicationID = -1, LicenseClass = -1, CreatedByUserID = -1;
+
+            if (clsLicenseData.GetLicenseInfoByDriverID(DriverID, ref LicenseID, ref ApplicationID, ref LicenseClass, ref IssueDate,
             ref ExpirationDate, ref Notes, ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
 
                 return new clsLicense(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate,
@@ -202,7 +220,7 @@ namespace DVLD_Business
 
         }
 
-        public bool ReleaseDetainedLicense(int ReleasedByUserID, ref int ApplicationID)
+        public bool ReleaseDetainedLicense(int ReleasedByUserID)
         {
             //First Create Application
             clsApplication Application = new clsApplication();

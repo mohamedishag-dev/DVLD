@@ -255,6 +255,41 @@ namespace DVLD_DataAccess
             return isFound;
         }
 
+        public static bool DoesActiveInternationalLicenseForDriverID(int DriverID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT * FROM InternationalLicenses 
+                              WHERE DriverID = @DriverID
+                              AND ExpirationDate > GETDATE() AND IsActive = 1";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@DriverID", DriverID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
         public static int GetActiveInternationalLicenseID(int LicenseID)
         {
             int InternationalLicenseID = -1;

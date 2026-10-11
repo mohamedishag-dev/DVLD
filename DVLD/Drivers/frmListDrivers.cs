@@ -1,4 +1,5 @@
 ﻿using DVLD.Licenses;
+using DVLD.Licenses.International_Licenses;
 using DVLD.People;
 using DVLD_Business;
 using System;
@@ -171,8 +172,13 @@ namespace DVLD
 
         private void issueInternationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+            int LicenseID = clsLicense.FindByDriverID((int)dgvDrivers.CurrentRow.Cells[0].Value).LicenseID;
+            frmIssueInternationalLicense frm = new frmIssueInternationalLicense(LicenseID);
+            frm.ShowDialog();
+
+            //refresh
+            frmDrivers_Load(null, null);
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,6 +191,13 @@ namespace DVLD
         {
             frmShowPersonInfo frm = new frmShowPersonInfo((int)dgvDrivers.CurrentRow.Cells[1].Value);
             frm.ShowDialog();
+        }
+
+        private void cmsDrivers_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            int DriverID= (int)dgvDrivers.CurrentRow.Cells[0].Value;
+            issueInternationalLicenseToolStripMenuItem.Enabled = !clsInternationalLicense.DoesActiveInternationalLicenseForDriverID(DriverID);
+
         }
     }
 }

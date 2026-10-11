@@ -17,7 +17,8 @@ namespace DVLD_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM DetainedLicenses WHERE DetainID = @DetainID;";
+            string query = @"SELECT * FROM DetainedLicenses WHERE DetainID = @DetainID
+                              ORDER BY ReleaseApplicationID ASC; ";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -38,11 +39,20 @@ namespace DVLD_DataAccess
                     CreatedByUserID = (int)reader["CreatedByUserID"];
                     IsReleased = (bool)reader["IsReleased"];
 
-                    if (reader["ReleaseDate"] == DBNull.Value)
+                    if (reader["ReleaseDate"] != DBNull.Value)
                         ReleaseDate = (DateTime)reader["ReleaseDate"];
+                    else
+                        ReleaseDate = DateTime.Now;
 
-                    ReleasedByUserID = (int)reader["ReleasedByUserID"];
-                    ReleaseApplicationID = (int)reader["ReleaseApplicationID"];
+                    if (reader["ReleasedByUserID"] != DBNull.Value)
+                        ReleasedByUserID = (int)reader["ReleasedByUserID"];
+                    else
+                        ReleasedByUserID = -1;
+
+                    if (reader["ReleaseApplicationID"] != DBNull.Value)
+                        ReleaseApplicationID = (int)reader["ReleaseApplicationID"];
+                    else
+                        ReleaseApplicationID = -1;
 
                 }
                 else
@@ -78,7 +88,8 @@ namespace DVLD_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM DetainedLicenses WHERE LicenseID = @LicenseID;";
+            string query = @"SELECT * FROM DetainedLicenses WHERE LicenseID = @LicenseID
+                              ORDER BY ReleaseApplicationID ASC;";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -99,17 +110,17 @@ namespace DVLD_DataAccess
                     CreatedByUserID = (int)reader["CreatedByUserID"];
                     IsReleased = (bool)reader["IsReleased"];
 
-                    if (reader["ReleaseDate"] == DBNull.Value)
+                    if (reader["ReleaseDate"] != DBNull.Value)
                         ReleaseDate = (DateTime)reader["ReleaseDate"];
                     else
                         ReleaseDate = DateTime.Now;
 
-                    if (reader["ReleasedByUserID"] == DBNull.Value)
+                    if (reader["ReleasedByUserID"] != DBNull.Value)
                         ReleasedByUserID = (int)reader["ReleasedByUserID"];
                     else
                         ReleasedByUserID = -1;
 
-                    if (reader["ReleaseApplicationID"] == DBNull.Value)
+                    if (reader["ReleaseApplicationID"] != DBNull.Value)
                         ReleaseApplicationID = (int)reader["ReleaseApplicationID"];
                     else
                         ReleaseApplicationID = -1;
@@ -154,8 +165,8 @@ namespace DVLD_DataAccess
 
             SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@DetainID", DetainID);
             command.Parameters.AddWithValue("@IsReleased", 1);
+            command.Parameters.AddWithValue("@DetainID", DetainID);
             command.Parameters.AddWithValue("@ReleaseDate", DateTime.Now);
             command.Parameters.AddWithValue("@ReleasedByUserID", ReleasedByUserID);
             command.Parameters.AddWithValue("@ReleaseApplicationID", ReleaseApplicationID);
@@ -344,7 +355,6 @@ namespace DVLD_DataAccess
             return dt;
 
         }
-
 
     }
 }

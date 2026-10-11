@@ -1,13 +1,6 @@
 ﻿using DVLD.Licenses;
 using DVLD_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD.Applications.Rlease_Detained_License
@@ -20,6 +13,11 @@ namespace DVLD.Applications.Rlease_Detained_License
         {
             InitializeComponent();
         }
+        public frmReleaseDetainedLicense(int LicenseID)
+        {
+            InitializeComponent();
+            _LicenseID = LicenseID;
+        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -29,20 +27,27 @@ namespace DVLD.Applications.Rlease_Detained_License
         private void frmReleaseDetainedLicense_Load(object sender, EventArgs e)
         {
             btnRelease.Enabled = false;
-            llShowNewLicenseInfo.Enabled = false;
-            llShowLicensesHistory.Enabled = false;
+            llShowReleasedLicenseInfo.Enabled = false;
+            llShowLicensesHistory.Enabled = (_LicenseID != -1);
+
+            if (_LicenseID != -1)
+            {
+                ctrlDriverLicenseInfoWithFilter1.LoadLicenseInfo(_LicenseID);
+                ctrlDriverLicenseInfoWithFilter1.Enabled = false;
+            }
 
         }
 
         private void ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected(int obj)
         {
             _LicenseID = obj;
-            _License = clsLicense.Find(_LicenseID);
+            _License = clsLicense.FindByID(_LicenseID);
 
             if (_License == null)
             {
+                ResetDetainInfo();
                 btnRelease.Enabled = false;
-                llShowNewLicenseInfo.Enabled = false;
+                llShowReleasedLicenseInfo.Enabled = false;
                 llShowLicensesHistory.Enabled = false;
                 return;
             }
@@ -51,21 +56,22 @@ namespace DVLD.Applications.Rlease_Detained_License
 
             if (!_License.IsDetained)
             {
+                ResetDetainInfo();
                 MessageBox.Show("Selected license is not detained, Choose another one: ",
                     "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            _FillDetainInfo();
             btnRelease.Enabled = (_License != null);
-           ctrlDetianInfo1.LoadDetainCard(_License.DetainedInfo.DetainID);
         }
 
         private void llShowLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int PersonID = clsLicense.Find(_LicenseID).DriverInfo.PersonID;
+            int PersonID = clsLicense.FindByID(_LicenseID).DriverInfo.PersonID;
             frmLicenseHistory frm = new frmLicenseHistory(PersonID);
             frm.ShowDialog();
-            
+
         }
 
         private void llShowNewLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -77,31 +83,58 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void btnRelease_Click(object sender, EventArgs e)
         {
-            //if (_License == null)
-            //{
-            //    return;
-            //}
+            if (_License == null)
+            {
+                return;
+            }
 
 
-            //if (MessageBox.Show("Are you sure you want to Renew the license!", "Confirm",
-            //    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            //    return;
+            if (MessageBox.Show("Are you sure you want to release this detained license?", "Confirm",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
 
-            //_License = _License.RenewLicense(txtNotes.Text.Trim(), clsGlobal.CurrentUser.UserID);
 
-            //if (_License != null)
-            //{
+            if (_License.ReleaseDetainedLicense(clsGlobal.CurrentUser.UserID))
+            {
 
-            //    btnRenew.Enabled = false;
-            //    llShowNewLicenseInfo.Enabled = true;
-            //    lblRenewedLicenseID.Text = _License.LicenseID.ToString();
-            //    lblRenewApplicationID.Text = _License.ApplicationID.ToString();
-            //    MessageBox.Show("Renew License Successfully with ID = " + _License.LicenseID, "Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnRelease.Enabled = false;
+                llShowReleasedLicenseInfo.Enabled = true;
+                lblApplicationID.Text = clsDetainedLicense.FindByID(_License.DetainedInfo.DetainID).ReleaseApplicationID.ToString();
+                MessageBox.Show("Renew License Successfully", "Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //}
-            //else
-            //    MessageBox.Show("License was not Renew!", "Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("License was not Renew!", "Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
+
+        private void _FillDetainInfo()
+        {
+            lblDetnainID.Text = _License.DetainedInfo.DetainID.ToString();
+            lblDetainDate.Text = _License.DetainedInfo.DetainDate.ToShortDateString();
+            lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense).Fees.ToString();
+
+            lblLicenseID.Text = _License.DetainedInfo.LicenseID.ToString();
+            lblCreatedBy.Text = _License.DetainedInfo.CreatedByUserID.ToString();
+            lblFineFees.Text = _License.DetainedInfo.FineFees.ToString();
+            lblTotalFees.Text = (Convert.ToSingle(lblApplicationFees.Text.ToString()) + Convert.ToSingle(lblFineFees.Text.ToString())).ToString();
+
+        }
+
+        public void ResetDetainInfo()
+        {
+
+            lblDetnainID.Text = "[???]";
+            lblDetainDate.Text = "[??/??/????]";
+            lblApplicationFees.Text = "[???]";
+            lblLicenseID.Text = "[???]";
+            lblCreatedBy.Text = "[???]";
+            lblFineFees.Text = "[???]";
+            lblTotalFees.Text = "[???]";
+            lblApplicationID.Text = "[???]";
+
+        }
+
+
     }
 }

@@ -25,7 +25,7 @@ namespace DVLD.Licenses
         public void LoadInfo(int LicenseID)
         {
             _LicenseID = LicenseID;
-            _LicenseInfo = clsLicense.Find(_LicenseID);
+            _LicenseInfo = clsLicense.FindByID(_LicenseID);
 
             if (_LicenseInfo == null)
             {

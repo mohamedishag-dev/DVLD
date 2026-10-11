@@ -66,7 +66,7 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void llShowLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int PersonID = clsLicense.Find(_LicenseID).DriverInfo.PersonID;
+            int PersonID = clsLicense.FindByID(_LicenseID).DriverInfo.PersonID;
             frmLicenseHistory frm = new frmLicenseHistory(PersonID);
             frm.ShowDialog();
         }
@@ -91,7 +91,7 @@ namespace DVLD.Applications.Rlease_Detained_License
         private void ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected(int obj)
         {
             _LicenseID = obj;
-            _License = clsLicense.Find(_LicenseID);
+            _License = clsLicense.FindByID(_LicenseID);
 
             if (_License == null)
             {

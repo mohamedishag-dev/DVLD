@@ -1,4 +1,5 @@
 ﻿using DVLD.Licenses;
+using DVLD.Licenses.International_Licenses;
 using DVLD.People;
 using DVLD_Business;
 using System;
@@ -67,7 +68,7 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = clsLicense.Find((int)dgvDetainedLicenses.CurrentRow.Cells[1].Value).DriverInfo.PersonID;
+            int PersonID = clsLicense.FindByID((int)dgvDetainedLicenses.CurrentRow.Cells[1].Value).DriverInfo.PersonID;
             frmLicenseHistory frm = new frmLicenseHistory(PersonID);
             frm.ShowDialog();
 
@@ -75,7 +76,7 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = clsLicense.Find((int)dgvDetainedLicenses.CurrentRow.Cells[1].Value).DriverInfo.PersonID;
+            int PersonID = clsLicense.FindByID((int)dgvDetainedLicenses.CurrentRow.Cells[1].Value).DriverInfo.PersonID;
             frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
             frm.ShowDialog();
         
@@ -203,13 +204,29 @@ namespace DVLD.Applications.Rlease_Detained_License
 
         private void issueInternationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
+            frmIssueInternationalLicense frm = new frmIssueInternationalLicense(LicenseID);
+            frm.ShowDialog();
 
+            //refresh
+            frmListDetainedLicenses_Load(null, null);
         }
 
         private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense(LicenseID);
+            frm.ShowDialog();
+
+            //refresh
+            frmListDetainedLicenses_Load(null, null);
+        }
+
+        private void cmsDetainedLicenses_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
+            releaseDetainedLicenseToolStripMenuItem.Enabled = clsDetainedLicense.IsLicenseDetained(LicenseID);
 
         }
     }

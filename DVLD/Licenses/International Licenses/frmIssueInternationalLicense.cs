@@ -79,6 +79,12 @@ namespace DVLD.Licenses.International_Licenses
             lblCreatedBy.Text = clsGlobal.CurrentUser.UserName;
             btnIssue.Enabled = false;
             llShowLicenseInfo.Enabled = false;
+
+            if (_LicenseID != -1)
+            {
+                ctrlDriverLicenseInfoWithFilter1.LoadLicenseInfo(_LicenseID);
+                ctrlDriverLicenseInfoWithFilter1.Enabled = false;
+            }
             llShowLicensesHistory.Enabled = (_LicenseID != -1);
 
         }
@@ -86,7 +92,7 @@ namespace DVLD.Licenses.International_Licenses
         private void ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected(int obj)
         {
 
-            if (clsLicense.Find(obj) == null)
+            if (clsLicense.FindByID(obj) == null)
             {
 
                 btnIssue.Enabled = false;

@@ -146,10 +146,9 @@ namespace DVLD_Business
 
         public bool ReleaseDetainedLicense(int ReleasedByUserID, int ApplicationID)
         {
-            return clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, ReleasedByUserID, ReleaseApplicationID);
+            return clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, ReleasedByUserID, ApplicationID);
 
         }
-
 
 
     }
